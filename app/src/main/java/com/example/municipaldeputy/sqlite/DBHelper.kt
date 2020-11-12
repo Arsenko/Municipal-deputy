@@ -4,54 +4,8 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import com.example.municipaldeputy.constants.*
 
-const val DATABASE_NAME = "city structure"
-const val DB_VERSION = 4
-
-
-const val REGION_TABLE = "region"
-const val R_KEY_ID = "_id"
-const val R_KEY_NAME = "name"
-
-const val DISTINCT_TABLE = "district"
-const val D_KEY_ID = "_id"
-const val D_KEY_NAME = "name"
-const val D_KEY_REGION_ID = "region_id"
-
-const val STREET_TABLE = "street"
-const val S_KEY_ID = "_id"
-const val S_KEY_NAME = "name"
-const val S_KEY_DISTINCT_ID = "street_id"
-
-const val HOUSE_TABLE = "house"
-const val H_KEY_ID = "_id"
-const val H_KEY_ADDRESS = "address"
-const val H_KEY_NUMBER_OF_ENTRANCES = "number_of_entrances"
-const val H_KEY_NUMBER_OF_FLOORS = "number_of_floors"
-const val H_KEY_MANAGEMENT_COMPANY = "management_company"
-const val H_KEY_STREET_ID = "street_id"
-
-const val ASSETS_TABLE = "assets"
-const val A_KEY_ID = "_id"
-const val A_KEY_SURNAME = "surname"
-const val A_KEY_NAME = "name"
-const val A_KEY_PATRONYMIC = "patronymic"
-const val A_KEY_APARTMENT_NUMBER = "apartment_number"
-const val A_KEY_PHONE_NUMBER = "phone_number"
-const val A_KEY_MAIL = "mail"
-const val A_KEY_HOUSE_ID = "house_id"
-
-const val PHOTO_TABLE = "photo_archive"
-const val P_KEY_ID = "_id"
-const val P_KEY_FILEPATH = "filepath"
-const val P_KEY_HOUSE_ID = "house_id"
-
-const val WORK_TABLE = "work_table"
-const val W_KEY_ID = "_id"
-const val W_KEY_NAME = "work_name"
-const val W_KEY_DATE = "work_date"
-const val W_KEY_STATE = "work_state"
-const val W_KEY_HOUSE_ID = "house_id"
 
 class DBHelper(
     context: Context?
@@ -61,43 +15,6 @@ class DBHelper(
     override fun onCreate(db: SQLiteDatabase?) {
         structureInit(db)
         debugInsert(db)
-    }
-
-    private fun debugInsert(db: SQLiteDatabase?) {
-        if (db != null) {
-            var contentValues = listOf(
-                ContentValues().apply {
-                    put(R_KEY_NAME, "Авиастроительный")
-                },
-                ContentValues().apply {
-                    put(R_KEY_NAME, "Вахитовский")
-                },
-                ContentValues().apply {
-                    put(R_KEY_NAME, "Кировский")
-                },
-                ContentValues().apply {
-                    put(R_KEY_NAME, "Ново-Совиновский")
-                },
-                ContentValues().apply {
-                    put(R_KEY_NAME, "Приволжский")
-                },
-                ContentValues().apply {
-                    put(R_KEY_NAME, "Советский")
-                }
-            )
-            contentValues.forEach {
-                db?.insert(REGION_TABLE, null, it)
-            }
-            contentValues = listOf(
-                ContentValues().apply {
-                    put(D_KEY_NAME, "Северный одномандатный избирательный округ №1")
-                    put(D_KEY_REGION_ID,1)
-                }
-            )
-            contentValues.forEach {
-                db?.insert(DISTINCT_TABLE, null, it)
-            }
-        }
     }
 
     private fun structureInit(db: SQLiteDatabase?) {
@@ -152,6 +69,230 @@ class DBHelper(
                     + W_KEY_HOUSE_ID + " INTEGER NOT NULL, " + "FOREIGN KEY (" + W_KEY_HOUSE_ID + ") " +
                     "REFERENCES " + HOUSE_TABLE + "(" + H_KEY_ID + ")" + ")"
         )
+    }
+
+    private fun debugInsert(db: SQLiteDatabase?) {
+        if (db != null) {
+
+            //районы
+            var contentValues = listOf(
+                ContentValues().apply {
+                    put(R_KEY_NAME, "Авиастроительный")//1
+                },
+                ContentValues().apply {
+                    put(R_KEY_NAME, "Вахитовский")//2
+                },
+                ContentValues().apply {
+                    put(R_KEY_NAME, "Кировский")//3
+                },
+                ContentValues().apply {
+                    put(R_KEY_NAME, "Ново-Совиновский")//4
+                },
+                ContentValues().apply {
+                    put(R_KEY_NAME, "Приволжский")//5
+                },
+                ContentValues().apply {
+                    put(R_KEY_NAME, "Советский")//6
+                },
+                ContentValues().apply {
+                    put(R_KEY_NAME, "Московский")//7
+                }
+            )
+            contentValues.forEach {
+                db?.insert(REGION_TABLE, null, it)
+            }
+
+            //округа
+            contentValues = listOf(
+                ContentValues().apply {
+                    put(D_KEY_NAME, "Северный одномандатный избирательный округ №1")//1
+                    put(D_KEY_REGION_ID, 1)
+                },
+                ContentValues().apply {
+                    put(D_KEY_NAME, "Караваевский одномандатный избирательный округ №2")//2
+                    put(D_KEY_REGION_ID, 1)
+                },
+                ContentValues().apply {
+                    put(D_KEY_NAME, "Академический одномандатный избирательный округ №3")//3
+                    put(D_KEY_REGION_ID, 2)
+                },
+                ContentValues().apply {
+                    put(D_KEY_NAME, "Кремлевский одномандатный избирательный округ №4")//4
+                    put(D_KEY_REGION_ID, 2)
+                },
+                ContentValues().apply {
+                    put(D_KEY_NAME, "Пороховой одномандатный избирательный округ №5")//5
+                    put(D_KEY_REGION_ID, 3)
+                },
+                ContentValues().apply {
+                    put(D_KEY_NAME, "Прибрежный одномандатный избирательный округ №6")//6
+                    put(D_KEY_REGION_ID, 3)
+                },
+                ContentValues().apply {
+                    put(D_KEY_NAME, "Декабристский одномандатный избирательный округ №7")//7
+                    put(D_KEY_REGION_ID, 7)
+                },
+                ContentValues().apply {
+                    put(D_KEY_NAME, "Гагаринский одномандатный избирательный округ №8")//8
+                    put(D_KEY_REGION_ID, 7)
+                },
+                ContentValues().apply {
+                    put(D_KEY_NAME, "Тасмовский одномандатный избирательный округ №9")//9
+                    put(D_KEY_REGION_ID, 7)
+                },
+                ContentValues().apply {
+                    put(D_KEY_NAME, "Октябрьский одномандатный избирательный округ №10")//10
+                    put(D_KEY_REGION_ID, 4)
+                },
+                ContentValues().apply {
+                    put(D_KEY_NAME, "Амирхановский одномандатный избирательный округ №11")//11
+                    put(D_KEY_REGION_ID, 4)
+                },
+                ContentValues().apply {
+                    put(D_KEY_NAME, "Чуйковский одномандатный избирательный округ №12")//12
+                    put(D_KEY_REGION_ID, 4)
+                },
+            )
+
+            contentValues.forEach {
+                db?.insert(DISTINCT_TABLE, null, it)
+            }
+
+            //улицы
+            contentValues = listOf(
+                ContentValues().apply {
+                    put(S_KEY_NAME, "Гудовцева")//1
+                    put(S_KEY_DISTINCT_ID, 1)
+                },
+                ContentValues().apply {
+                    put(S_KEY_NAME, "Камчатская")//2
+                    put(S_KEY_DISTINCT_ID, 1)
+                },
+                ContentValues().apply {
+                    put(S_KEY_NAME, "Керченская")//3
+                    put(S_KEY_DISTINCT_ID, 1)
+                },
+                ContentValues().apply {
+                    put(S_KEY_NAME, "Колхозная")//4
+                    put(S_KEY_DISTINCT_ID, 1)
+                },
+                ContentValues().apply {
+                    put(S_KEY_NAME, "Колхозная 2-я")//5
+                    put(S_KEY_DISTINCT_ID, 1)
+                },
+                ContentValues().apply {
+                    put(S_KEY_NAME, "Лянгузова")//6
+                    put(S_KEY_DISTINCT_ID, 1)
+                },
+                ContentValues().apply {
+                    put(S_KEY_NAME, "Малая Заречная")//7
+                    put(S_KEY_DISTINCT_ID, 1)
+                },
+                ContentValues().apply {
+                    put(S_KEY_NAME, "Ново-Караваевская")//8
+                    put(S_KEY_DISTINCT_ID, 1)
+                },
+                ContentValues().apply {
+                    put(S_KEY_NAME, "Односторонняя Луговая")//9
+                    put(S_KEY_DISTINCT_ID, 1)
+                },
+                ContentValues().apply {
+                    put(S_KEY_NAME, "Песочная")//10
+                    put(S_KEY_DISTINCT_ID, 1)
+                },
+                ContentValues().apply {
+                    put(S_KEY_NAME, "Петра Баранова")//11
+                    put(S_KEY_DISTINCT_ID, 1)
+                }
+            )
+            contentValues.forEach {
+                db?.insert(STREET_TABLE, null, it)
+            }
+
+            //дома, информация ошибочна, начиная отсюда
+            contentValues = listOf(
+                ContentValues().apply {
+                    put(H_KEY_ADDRESS, "улица Гудовцева №1")//1
+                    put(H_KEY_NUMBER_OF_ENTRANCES, 3)
+                    put(H_KEY_NUMBER_OF_FLOORS, 5)
+                    put(H_KEY_MANAGEMENT_COMPANY, "Ук \"Пжкх\"")
+                    put(H_KEY_STREET_ID, 1)
+                },
+                ContentValues().apply {
+                    put(H_KEY_ADDRESS, "улица Гудовцева №2")//2
+                    put(H_KEY_NUMBER_OF_ENTRANCES, 4)
+                    put(H_KEY_NUMBER_OF_FLOORS, 9)
+                    put(H_KEY_MANAGEMENT_COMPANY, "Ук \"Пжкх\"")
+                    put(H_KEY_STREET_ID, 1)
+                },
+                ContentValues().apply {
+                    put(H_KEY_ADDRESS, "улица Гудовцева №2a")//3
+                    put(H_KEY_NUMBER_OF_ENTRANCES, 2)
+                    put(H_KEY_NUMBER_OF_FLOORS, 10)
+                    put(H_KEY_MANAGEMENT_COMPANY, "ТСЖ \"Гудок\"")
+                    put(H_KEY_STREET_ID, 1)
+                },
+                ContentValues().apply {
+                    put(H_KEY_ADDRESS, "улица Камчатская №1")//4
+                    put(H_KEY_NUMBER_OF_ENTRANCES, 3)
+                    put(H_KEY_NUMBER_OF_FLOORS, 5)
+                    put(H_KEY_MANAGEMENT_COMPANY, "Ук \"Жкх Танкодром\"")
+                    put(H_KEY_STREET_ID, 2)
+                },
+                ContentValues().apply {
+                    put(H_KEY_ADDRESS, "улица Камчатская №2")//5
+                    put(H_KEY_NUMBER_OF_ENTRANCES, 3)
+                    put(H_KEY_NUMBER_OF_FLOORS, 5)
+                    put(H_KEY_MANAGEMENT_COMPANY, "Ук \"Свобода\"")
+                    put(H_KEY_STREET_ID, 2)
+                },
+                ContentValues().apply {
+                    put(H_KEY_ADDRESS, "улица Камчатская №3")//6
+                    put(H_KEY_NUMBER_OF_ENTRANCES, 3)
+                    put(H_KEY_NUMBER_OF_FLOORS, 5)
+                    put(H_KEY_MANAGEMENT_COMPANY, "Ук \"Пжкх\"")
+                    put(H_KEY_STREET_ID, 2)
+                },
+                ContentValues().apply {
+                    put(H_KEY_ADDRESS, "улица Керченская №1")//7
+                    put(H_KEY_NUMBER_OF_ENTRANCES, 3)
+                    put(H_KEY_NUMBER_OF_FLOORS, 5)
+                    put(H_KEY_MANAGEMENT_COMPANY, "ТСЖ \"Рога и копыта\"")
+                    put(H_KEY_STREET_ID, 3)
+                },
+                ContentValues().apply {
+                    put(H_KEY_ADDRESS, "улица Керченская №2")//8
+                    put(H_KEY_NUMBER_OF_ENTRANCES, 3)
+                    put(H_KEY_NUMBER_OF_FLOORS, 5)
+                    put(H_KEY_MANAGEMENT_COMPANY, "Ук \"Жкх Танкодром\"")
+                    put(H_KEY_STREET_ID, 3)
+                },
+                ContentValues().apply {
+                    put(H_KEY_ADDRESS, "улица Керченская №3")//9
+                    put(H_KEY_NUMBER_OF_ENTRANCES, 3)
+                    put(H_KEY_NUMBER_OF_FLOORS, 5)
+                    put(H_KEY_MANAGEMENT_COMPANY, "Ук \"Жкх Танкодром\"")
+                    put(H_KEY_STREET_ID, 3)
+                },
+                ContentValues().apply {
+                    put(H_KEY_ADDRESS, "улица Керченская №3а")//10
+                    put(H_KEY_NUMBER_OF_ENTRANCES, 3)
+                    put(H_KEY_NUMBER_OF_FLOORS, 5)
+                    put(H_KEY_MANAGEMENT_COMPANY, "ТСЖ \"Воля народа\"")
+                    put(H_KEY_STREET_ID, 3)
+                },
+                ContentValues().apply {
+                    put(H_KEY_ADDRESS, "улица Колхозная №2а")//11
+                    put(H_KEY_NUMBER_OF_ENTRANCES, 3)
+                    put(H_KEY_NUMBER_OF_FLOORS, 5)
+                    put(H_KEY_MANAGEMENT_COMPANY, "ТСЖ \"Воля народа\"")
+                    put(H_KEY_STREET_ID, 4)
+                }
+            )
+            contentValues.forEach {
+                db?.insert(HOUSE_TABLE, null, it)
+            }
+        }
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {

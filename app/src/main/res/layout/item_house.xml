@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp">
+
+    <ImageView
+        android:id="@+id/house_preview"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_margin="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/house_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/house_floors"
+        app:layout_constraintStart_toEndOf="@+id/house_preview"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="дом какой-то" />
+
+    <TextView
+        android:id="@+id/house_floors"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/house_management_company"
+        app:layout_constraintStart_toEndOf="@+id/house_preview"
+        app:layout_constraintTop_toBottomOf="@+id/house_address"
+        tools:text="этажей много" />
+
+    <TextView
+        android:id="@+id/house_entrances"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/house_preview"
+        app:layout_constraintStart_toEndOf="@+id/house_preview"
+        app:layout_constraintTop_toBottomOf="@+id/house_management_company"
+        tools:text="подъездов мало" />
+
+    <TextView
+        android:id="@+id/house_management_company"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/house_entrances"
+        app:layout_constraintStart_toEndOf="@+id/house_preview"
+        app:layout_constraintTop_toBottomOf="@+id/house_floors"
+        tools:text="застройщик такой-то" />
+
+    <TextView
+        android:id="@+id/house_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
