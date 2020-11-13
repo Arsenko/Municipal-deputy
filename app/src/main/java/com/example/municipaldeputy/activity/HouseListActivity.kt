@@ -52,10 +52,17 @@ class HouseListActivity : AppCompatActivity() {
                 startActivity(toActive)
             }
             WORK_PLANE_VIEW -> {
-                //тут работы планируемые
+                val toWork=Intent(this@HouseListActivity,WorkActivity::class.java)
+                toWork.putExtra("id",item.order)
+                toWork.putExtra("done",false)
+                startActivity(toWork)
             }
             WORK_DONE_VIEW -> {
-                //тут работы сделанные
+
+                val toWork=Intent(this@HouseListActivity,WorkActivity::class.java)
+                toWork.putExtra("id",item.order)
+                toWork.putExtra("done",true)
+                startActivity(toWork)
             }
         }
         return super.onContextItemSelected(item)

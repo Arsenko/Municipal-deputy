@@ -25,6 +25,9 @@
         <activity android:name=".activity.ActiveActivity">
 
         </activity>
+        <activity android:name=".activity.WorkActivity">
+
+        </activity>
     </application>
 
 </manifest>
