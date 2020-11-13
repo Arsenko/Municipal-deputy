@@ -6,11 +6,10 @@ import android.database.Cursor
 
 import android.database.sqlite.SQLiteDatabase
 import com.example.municipaldeputy.constants.*
-import com.example.municipaldeputy.entity.District
-import com.example.municipaldeputy.entity.House
-import com.example.municipaldeputy.entity.Region
-import com.example.municipaldeputy.entity.Street
+import com.example.municipaldeputy.entity.*
 import java.sql.SQLException
+import java.text.SimpleDateFormat
+import java.time.LocalDate
 
 
 class DBManager(c: Context) {
@@ -150,5 +149,129 @@ class DBManager(c: Context) {
             cursor.close()
         }
         return houselist
+    }
+
+    fun fetchPhoto(houseId: Int): List<PhotoLink> {
+        var photoLinkList = mutableListOf<PhotoLink>()
+        val cursor: Cursor? = database!!.query(
+            PHOTO_TABLE,
+            arrayOf(
+                P_KEY_ID,
+                P_KEY_FILEPATH
+            ),
+            "$P_KEY_HOUSE_ID = $houseId",
+            null,
+            null,
+            null,
+            null
+        )
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                do {
+                    photoLinkList.add(
+                        PhotoLink(
+                            cursor.getInt(cursor.getColumnIndex(P_KEY_ID)),
+                            cursor.getString(cursor.getColumnIndex(P_KEY_FILEPATH))
+                        )
+                    )
+                } while (cursor.moveToNext())
+            }
+            cursor.close()
+        }
+        return photoLinkList.toList()
+    }
+
+    fun fetchActive(houseId: Int): List<Human> {
+        var activeList = mutableListOf<Human>()
+        val cursor: Cursor? = database!!.query(
+            ASSETS_TABLE,
+            arrayOf(
+                A_KEY_ID,
+                A_KEY_SURNAME,
+                A_KEY_NAME,
+                A_KEY_PATRONYMIC,
+                A_KEY_APARTMENT_NUMBER,
+                A_KEY_PHONE_NUMBER,
+                A_KEY_MAIL
+            ),
+            "$A_KEY_HOUSE_ID = $houseId",
+            null,
+            null,
+            null,
+            null
+        )
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                do {
+                    activeList.add(
+                        Human(
+                            cursor.getInt(cursor.getColumnIndex(A_KEY_ID)),
+                            cursor.getString(cursor.getColumnIndex(A_KEY_SURNAME)),
+                            cursor.getString(cursor.getColumnIndex(A_KEY_NAME)),
+                            cursor.getString(cursor.getColumnIndex(A_KEY_PATRONYMIC)),
+                            cursor.getInt(cursor.getColumnIndex(A_KEY_APARTMENT_NUMBER)),
+                            cursor.getString(cursor.getColumnIndex(A_KEY_PHONE_NUMBER)),
+                            cursor.getString(cursor.getColumnIndex(A_KEY_MAIL)),
+                        )
+                    )
+                } while (cursor.moveToNext())
+            }
+            cursor.close()
+        }
+        return activeList.toList()
+    }
+
+    fun fetchWork(houseId: Int, done: Boolean): List<Work> {
+        var activeList = mutableListOf<Work>()
+        val cursor = when (done) {
+            true -> {
+                database!!.query(
+                    WORK_TABLE,
+                    arrayOf(
+                        W_KEY_ID,
+                        W_KEY_NAME,
+                        W_KEY_DATE,
+                        W_KEY_WORKER
+                    ),
+                    "$W_KEY_HOUSE_ID = $houseId AND $W_KEY_STATE=1",
+                    null,
+                    null,
+                    null,
+                    null
+                )
+            }
+            false -> {
+                database!!.query(
+                    WORK_TABLE,
+                    arrayOf(
+                        W_KEY_ID,
+                        W_KEY_NAME,
+                        W_KEY_DATE,
+                        W_KEY_WORKER
+                    ),
+                    "$W_KEY_HOUSE_ID = $houseId AND $W_KEY_STATE=0",
+                    null,
+                    null,
+                    null,
+                    null
+                )
+            }
+        }
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                do {
+                    activeList.add(
+                        Work(
+                            cursor.getInt(cursor.getColumnIndex(W_KEY_ID)),
+                            cursor.getString(cursor.getColumnIndex(W_KEY_NAME)),
+                            SimpleDateFormat("yyyy-mm-dd").parse(cursor.getString(cursor.getColumnIndex(W_KEY_DATE))),
+                            cursor.getString(cursor.getColumnIndex(W_KEY_WORKER))
+                        )
+                    )
+                } while (cursor.moveToNext())
+            }
+            cursor.close()
+        }
+        return activeList.toList()
     }
 }

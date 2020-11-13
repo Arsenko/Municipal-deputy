@@ -6,57 +6,46 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/house_address"
+        android:id="@+id/full_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:padding="5dp"
-        app:layout_constraintBottom_toTopOf="@+id/house_floors"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="дом какой-то" />
+        tools:text="ФИО" />
 
     <TextView
-        android:id="@+id/house_floors"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:padding="5dp"
-        app:layout_constraintBottom_toTopOf="@+id/house_management_company"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/house_address"
-        tools:text="этажей много" />
-
-    <TextView
-        android:id="@+id/house_entrances"
+        android:id="@+id/apartment_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:padding="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/house_management_company"
-        tools:text="подъездов мало" />
+        app:layout_constraintTop_toBottomOf="@+id/full_name"
+        tools:text="Квартира такая-то" />
 
     <TextView
-        android:id="@+id/house_management_company"
+        android:id="@+id/phone_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:padding="5dp"
-        app:layout_constraintBottom_toTopOf="@+id/house_entrances"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/house_floors"
-        tools:text="застройщик такой-то" />
+        app:layout_constraintTop_toBottomOf="@+id/apartment_number"
+        tools:text="телефон есть" />
 
     <TextView
-        android:id="@+id/house_id"
+        android:id="@+id/mail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
+        android:layout_margin="5dp"
+        android:padding="5dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/phone_number"
+        tools:text="ящик присутствует" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,7 +1,7 @@
 package com.example.municipaldeputy.constants
 
 const val DATABASE_NAME = "city structure"
-const val DB_VERSION = 8
+const val DB_VERSION = 12
 
 const val REGION_TABLE = "region"
 const val R_KEY_ID = "_id"
@@ -44,5 +44,6 @@ const val WORK_TABLE = "work_table"
 const val W_KEY_ID = "_id"
 const val W_KEY_NAME = "work_name"
 const val W_KEY_DATE = "work_date"
+const val W_KEY_WORKER ="worker"
 const val W_KEY_STATE = "work_state"
 const val W_KEY_HOUSE_ID = "house_id"

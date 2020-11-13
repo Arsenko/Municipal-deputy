@@ -43,11 +43,13 @@ class HouseListActivity : AppCompatActivity() {
         when (item.itemId) {
             PHOTO_VIEW -> {
                 val toPhotoGalery=Intent(this@HouseListActivity,PhotoActivity::class.java)
-                toPhotoGalery.putExtra("id",item.order.toString())
+                toPhotoGalery.putExtra("id",item.order)
                 startActivity(toPhotoGalery)
             }
             ACTIVE_VIEW -> {
-                //тут активные люди
+                val toActive=Intent(this@HouseListActivity,ActiveActivity::class.java)
+                toActive.putExtra("id",item.order)
+                startActivity(toActive)
             }
             WORK_PLANE_VIEW -> {
                 //тут работы планируемые
