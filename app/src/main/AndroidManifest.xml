@@ -22,6 +22,27 @@
         <activity android:name=".activity.AddActivity">
             
         </activity>
+        <activity android:name=".activity.AddRegionActivity">
+
+        </activity>
+        <activity android:name=".activity.AddDistrictActivity">
+
+        </activity>
+        <activity android:name=".activity.AddStreetActivity">
+
+        </activity>
+        <activity android:name=".activity.AddHouseActivity">
+
+        </activity>
+        <activity android:name=".activity.AddPhotoActivity">
+
+        </activity>
+        <activity android:name=".activity.AddWorkActivity">
+
+        </activity>
+        <activity android:name=".activity.AddActiveActivity">
+
+        </activity>
         <activity android:name=".activity.PrimaryChoiseActivity">
 
         </activity>

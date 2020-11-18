@@ -38,7 +38,7 @@ class AddHouseActivity: AppCompatActivity() {
                     Integer.parseInt(number_of_floors_edt.text.toString()),
                     management_company_edt.text.toString()
                 ),
-                spinner.selectedItemPosition + 1
+                spinner.selectedItem.toString()
             )
         }
     }

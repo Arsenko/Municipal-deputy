@@ -195,6 +195,26 @@ class DBManager(c: Context) {
         return false
     }
 
+    fun fetchStreetById(streetName: String):Int {
+        val cursor: Cursor? =
+            database!!.query(
+                STREET_TABLE,
+                arrayOf(S_KEY_ID),
+                "$S_KEY_NAME = \"$streetName\"",
+                null,
+                null,
+                null,
+                null
+            )
+        if (cursor!!.count != 0) {
+            if (cursor.moveToFirst()) {
+                return cursor.getInt(cursor.getColumnIndex(S_KEY_ID))
+            }
+            cursor.close()
+        }
+        return -1
+    }
+
     fun fetchHouse(streetId: Int?): MutableList<House> {
         var houselist = mutableListOf<House>()
         val cursor: Cursor? = if (streetId != null) {
@@ -509,8 +529,9 @@ class DBManager(c: Context) {
 
     fun insertHouse(
         house:House,
-        streetId: Int
+        streetName: String
     ) {
+        Toast.makeText(this.context,streetName,Toast.LENGTH_LONG).show()
         if (fetchHouse(house.address)) {
             Toast.makeText(this.context, R.string.already_exist, Toast.LENGTH_LONG).show()
         } else {
@@ -519,7 +540,7 @@ class DBManager(c: Context) {
             contentValue.put(H_KEY_NUMBER_OF_ENTRANCES, house.entrancesCount)
             contentValue.put(H_KEY_NUMBER_OF_FLOORS, house.floorCount)
             contentValue.put(H_KEY_MANAGEMENT_COMPANY, house.managementCompany)
-            contentValue.put(H_KEY_STREET_ID, streetId)
+            contentValue.put(H_KEY_STREET_ID, fetchStreetById(streetName))
             database!!.insert(HOUSE_TABLE, null, contentValue)
             Toast.makeText(this.context, R.string.add_success, Toast.LENGTH_LONG).show()
         }

@@ -7,6 +7,7 @@ import com.example.municipaldeputy.R
 import com.example.municipaldeputy.adapter.HouseAdapter
 import com.example.municipaldeputy.sqlite.DBManager
 import kotlinx.android.synthetic.main.activity_house_list.*
+import kotlinx.android.synthetic.main.item_add_region.*
 import kotlinx.android.synthetic.main.item_add_region.view.*
 
 class AddRegionActivity : AppCompatActivity() {
@@ -21,7 +22,7 @@ class AddRegionActivity : AppCompatActivity() {
     private fun init() {
         dbManager = DBManager(this)
         dbManager.openRead()
-        with(container) {
+        add_btn.setOnClickListener {
             dbManager.insertRegion(region_name_edt.text.toString())
         }
 

@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.activity_primary_choise.*
 
 class PrimaryChoiseActivity : AppCompatActivity() {
     private lateinit var dbManager: DBManager
+    lateinit var streetlist:List<Street>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,7 +75,7 @@ class PrimaryChoiseActivity : AppCompatActivity() {
     }
 
     private fun refreshStreet(id: Int) {
-        val streetlist = dbManager.fetchStreet(id)
+        streetlist = dbManager.fetchStreet(id)
         val streetAdapter = ArrayAdapter(this, R.layout.multiline_spinner_dropdown_item, streetlist)
         streetAdapter.setDropDownViewResource(R.layout.multiline_spinner_dropdown_item)
         val streetSpinner = street_spinner
@@ -89,9 +90,8 @@ class PrimaryChoiseActivity : AppCompatActivity() {
                 if (intent.hasExtra("id")) {
                     intent.removeExtra("id")
                 }
-                intent.putExtra("id", (parent?.getItemAtPosition(position) as Street).id)
+                intent.putExtra("id", streetlist[position].id)
             }
-
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
         }

@@ -24,4 +24,6 @@
     <string name="add_success">Added successfully</string>
     <string name="pick_photo">At first select a photo</string>
     <string name="permission_error">Permission error</string>
+    <string name="add_work">Add Work</string>
+    <string name="add_asset">Add Asset</string>
 </resources>

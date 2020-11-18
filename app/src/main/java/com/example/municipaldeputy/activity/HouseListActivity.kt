@@ -6,6 +6,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.municipaldeputy.R
+import com.example.municipaldeputy.adapter.ActiveAdapter
 import com.example.municipaldeputy.adapter.HouseAdapter
 import com.example.municipaldeputy.constants.ACTIVE_VIEW
 import com.example.municipaldeputy.constants.PHOTO_VIEW
@@ -30,9 +31,9 @@ class HouseListActivity : AppCompatActivity() {
             dbManager.open()
             val houseList = dbManager.fetchHouse(intent.getIntExtra("id",
                 -1))
-            with(container) {
+            with(container){
                 layoutManager = LinearLayoutManager(this@HouseListActivity)
-                adapter = HouseAdapter(houseList, applicationContext)
+                adapter = HouseAdapter(houseList,applicationContext)
             }
         }
 
