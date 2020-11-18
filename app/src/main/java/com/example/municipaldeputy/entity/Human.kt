@@ -1,7 +1,7 @@
 package com.example.municipaldeputy.entity
 
 class Human(
-    val id:Int,
+    val id:Int?,
     val surname:String,
     val name:String,
     val patronymic:String,

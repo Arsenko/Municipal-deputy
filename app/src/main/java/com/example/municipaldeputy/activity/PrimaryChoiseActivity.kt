@@ -8,7 +8,6 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.example.municipaldeputy.R
 import com.example.municipaldeputy.entity.District
-import com.example.municipaldeputy.entity.House
 import com.example.municipaldeputy.entity.Region
 import com.example.municipaldeputy.entity.Street
 import com.example.municipaldeputy.sqlite.DBManager
@@ -42,7 +41,7 @@ class PrimaryChoiseActivity : AppCompatActivity() {
                 id: Long
             ) {
                 val selectedItem = parent?.getItemAtPosition(position) as Region
-                refreshDistrict(selectedItem.id)
+                refreshDistrict(selectedItem.id!!)
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -66,7 +65,7 @@ class PrimaryChoiseActivity : AppCompatActivity() {
                 id: Long
             ) {
                 val selectedItem = parent?.getItemAtPosition(position) as District
-                refreshStreet(selectedItem.id)
+                refreshStreet(selectedItem.id!!)
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {

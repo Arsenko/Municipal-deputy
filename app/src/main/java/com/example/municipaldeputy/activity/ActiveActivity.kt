@@ -1,17 +1,10 @@
 package com.example.municipaldeputy.activity
 
-import android.content.Intent
 import android.os.Bundle
-import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.municipaldeputy.R
 import com.example.municipaldeputy.adapter.ActiveAdapter
-import com.example.municipaldeputy.adapter.HouseAdapter
-import com.example.municipaldeputy.constants.ACTIVE_VIEW
-import com.example.municipaldeputy.constants.PHOTO_VIEW
-import com.example.municipaldeputy.constants.WORK_DONE_VIEW
-import com.example.municipaldeputy.constants.WORK_PLANE_VIEW
 import com.example.municipaldeputy.sqlite.DBManager
 import kotlinx.android.synthetic.main.activity_house_list.*
 

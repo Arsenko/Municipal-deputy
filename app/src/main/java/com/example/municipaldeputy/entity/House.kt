@@ -1,7 +1,7 @@
 package com.example.municipaldeputy.entity
 
 class House(
-    val id:Int,
+    val id:Int?,
     val address:String,
     val entrancesCount:Int,
     val floorCount:Int,

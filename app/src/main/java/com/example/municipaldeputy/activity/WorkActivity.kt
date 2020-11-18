@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.municipaldeputy.R
-import com.example.municipaldeputy.adapter.*
+import com.example.municipaldeputy.adapter.WorkAdapter
 import com.example.municipaldeputy.sqlite.DBManager
 import kotlinx.android.synthetic.main.activity_house_list.*
 

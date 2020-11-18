@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="add_district">Add District</string>
+    <string name="add_street">Add Street</string>
+    <string name="street_name">Street name</string>
+    <string name="create_street">Create Street</string>
+    <string name="district_name">District name</string>
+    <string name="create_district">Create District</string>
+    <string name="create_house">Create House</string>
+    <string name="add_house">Add House</string>
+    <string name="number_of_entrances">Number of entrances</string>
+    <string name="managment_company">Managment company</string>
+    <string name="number_of_floors">Number of floors</string>
+    <string name="create_work">Create Work</string>
+    <string name="mail">Mail</string>
+    <string name="phone_number">Phone number</string>
+    <string name="apartment_number">Apartment number</string>
+    <string name="patronymic">Patronymic</string>
+    <string name="name">Name</string>
+    <string name="surname">Surname</string>
+    <string name="create_photo">Create photo</string>
+    <string name="add_photo">Add Photo</string>
+    <string name="already_exist">Already Exist</string>
+    <string name="add_success">Added successfully</string>
+    <string name="pick_photo">At first select a photo</string>
+</resources>

@@ -14,9 +14,16 @@ class FileService(val context: Context) {
         val listOfDrawable= mutableListOf<Drawable>()
         val linkList=dbManager.fetchPhoto(houseId)
         for(item in linkList){
-            listOfDrawable.add(
-                context.getDrawable(context.getResources().getIdentifier(item.link,"drawable",context.packageName))!!
-            )
+            if(item.isResource==1){
+                listOfDrawable.add(
+                    context.getDrawable(
+                        context.getResources()
+                            .getIdentifier(item.link, "drawable", context.packageName)
+                    )!!
+                )
+            }else{
+                Drawable.createFromPath(item.link)?.let { listOfDrawable.add(it) }
+            }
         }
         return listOfDrawable.toList()
     }

@@ -1,16 +1,10 @@
 package com.example.municipaldeputy.activity
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentActivity
-import androidx.viewpager.widget.PagerAdapter
-import androidx.viewpager.widget.ViewPager
 import com.example.municipaldeputy.R
-import com.example.municipaldeputy.adapter.PageAdapter
-import com.example.municipaldeputy.constants.P_KEY_FILEPATH
-import com.example.municipaldeputy.constants.P_KEY_HOUSE_ID
+import com.example.municipaldeputy.adapter.PhotoAdapter
 import com.example.municipaldeputy.service.FileService
-import com.example.municipaldeputy.sqlite.DBManager
 import kotlinx.android.synthetic.main.activity_photo.*
 
 class PhotoActivity : FragmentActivity() {
@@ -27,7 +21,7 @@ class PhotoActivity : FragmentActivity() {
         if (intent.hasExtra("id")) {
             fileService= FileService(applicationContext)
             val list=fileService.getPhotoList(intent.getIntExtra("id",-1))
-            container.adapter= PageAdapter(list)
+            container.adapter= PhotoAdapter(list)
         }
     }
 }

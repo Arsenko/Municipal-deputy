@@ -49,7 +49,8 @@ class DBHelper(
         //фото
         db?.execSQL(
             "create table " + PHOTO_TABLE + "(" + P_KEY_ID
-                    + " integer primary key AUTOINCREMENT, " + P_KEY_FILEPATH + " text," + P_KEY_HOUSE_ID
+                    + " integer primary key AUTOINCREMENT, " + P_KEY_FILEPATH + " text,"
+                    + P_KEY_IS_RESOURCE + " integer, " + P_KEY_HOUSE_ID
                     + " INTEGER NOT NULL, " + "FOREIGN KEY (" + P_KEY_HOUSE_ID + ") REFERENCES "
                     + HOUSE_TABLE + "(" + H_KEY_ID + ")" + ")"
         )
@@ -299,46 +300,57 @@ class DBHelper(
                 ContentValues().apply {
                     put(P_KEY_FILEPATH, "house_1")//1
                     put(P_KEY_HOUSE_ID, 1)
+                    put(P_KEY_IS_RESOURCE, 1)
                 },
                 ContentValues().apply {
                     put(P_KEY_FILEPATH, "house_2")//2
                     put(P_KEY_HOUSE_ID, 1)
+                    put(P_KEY_IS_RESOURCE, 1)
                 },
                 ContentValues().apply {
                     put(P_KEY_FILEPATH, "house_3")//3
                     put(P_KEY_HOUSE_ID, 1)
+                    put(P_KEY_IS_RESOURCE, 1)
                 },
                 ContentValues().apply {
                     put(P_KEY_FILEPATH, "house_4")//4
                     put(P_KEY_HOUSE_ID, 2)
+                    put(P_KEY_IS_RESOURCE, 1)
                 },
                 ContentValues().apply {
                     put(P_KEY_FILEPATH, "house_5")//5
                     put(P_KEY_HOUSE_ID, 2)
+                    put(P_KEY_IS_RESOURCE, 1)
                 },
                 ContentValues().apply {
                     put(P_KEY_FILEPATH, "house_6")//6
                     put(P_KEY_HOUSE_ID, 2)
+                    put(P_KEY_IS_RESOURCE, 1)
                 },
                 ContentValues().apply {
                     put(P_KEY_FILEPATH, "house_1")//7
                     put(P_KEY_HOUSE_ID, 3)
+                    put(P_KEY_IS_RESOURCE, 1)
                 },
                 ContentValues().apply {
                     put(P_KEY_FILEPATH, "house_3")//8
                     put(P_KEY_HOUSE_ID, 3)
+                    put(P_KEY_IS_RESOURCE, 1)
                 },
                 ContentValues().apply {
                     put(P_KEY_FILEPATH, "house_5")//9
                     put(P_KEY_HOUSE_ID, 3)
+                    put(P_KEY_IS_RESOURCE, 1)
                 },
                 ContentValues().apply {
                     put(P_KEY_FILEPATH, "house_2")//10
                     put(P_KEY_HOUSE_ID, 4)
+                    put(P_KEY_IS_RESOURCE, 1)
                 },
                 ContentValues().apply {
                     put(P_KEY_FILEPATH, "house_4")//11
                     put(P_KEY_HOUSE_ID, 4)
+                    put(P_KEY_IS_RESOURCE, 1)
                 }
             )
             contentValues.forEach {
@@ -450,82 +462,81 @@ class DBHelper(
             contentValues.forEach {
                 db?.insert(ASSETS_TABLE, null, it)
             }
-
             contentValues = listOf(
                 ContentValues().apply {
                     put(W_KEY_NAME, "Капитальный ремонт")
                     put(W_KEY_DATE, "1970-01-01")
-                    put(W_KEY_WORKER,"УК \"Пжкх\"")
+                    put(W_KEY_WORKER, "УК \"Пжкх\"")
                     put(W_KEY_STATE, 1)
                     put(W_KEY_HOUSE_ID, 1)
                 },
                 ContentValues().apply {
                     put(W_KEY_NAME, "Замена водопроводных труб")
                     put(W_KEY_DATE, "2020-10-02")
-                    put(W_KEY_WORKER,"СК БРИЗ")
+                    put(W_KEY_WORKER, "СК БРИЗ")
                     put(W_KEY_STATE, 1)
                     put(W_KEY_HOUSE_ID, 1)
                 },
                 ContentValues().apply {
                     put(W_KEY_NAME, "Ремонт облицовки")
                     put(W_KEY_DATE, "2017-01-01")
-                    put(W_KEY_WORKER,"ГК Профит")
+                    put(W_KEY_WORKER, "ГК Профит")
                     put(W_KEY_STATE, 0)
                     put(W_KEY_HOUSE_ID, 1)
                 },
                 ContentValues().apply {
                     put(W_KEY_NAME, "Ремонт пожарной лестницы")
                     put(W_KEY_DATE, "2018-03-15")
-                    put(W_KEY_WORKER,"УК \"Пжкх\"")
+                    put(W_KEY_WORKER, "УК \"Пжкх\"")
                     put(W_KEY_STATE, 0)
                     put(W_KEY_HOUSE_ID, 1)
                 },
                 ContentValues().apply {
                     put(W_KEY_NAME, "Установка общедомовых счётчиков")
                     put(W_KEY_DATE, "2025-11-11")
-                    put(W_KEY_WORKER,"ГК Профит")
+                    put(W_KEY_WORKER, "ГК Профит")
                     put(W_KEY_STATE, 0)
                     put(W_KEY_HOUSE_ID, 1)
                 },
                 ContentValues().apply {
                     put(W_KEY_NAME, "Капитальный ремонт")
                     put(W_KEY_DATE, "2020-10-01")
-                    put(W_KEY_WORKER,"УК \"Пжкх\"")
+                    put(W_KEY_WORKER, "УК \"Пжкх\"")
                     put(W_KEY_STATE, 0)
                     put(W_KEY_HOUSE_ID, 2)
                 },
                 ContentValues().apply {
                     put(W_KEY_NAME, "Ремонт детской площадки")
                     put(W_KEY_DATE, "2001-04-01")
-                    put(W_KEY_WORKER,"Унистрой")
+                    put(W_KEY_WORKER, "Унистрой")
                     put(W_KEY_STATE, 0)
                     put(W_KEY_HOUSE_ID, 2)
                 },
                 ContentValues().apply {
                     put(W_KEY_NAME, "Благоустройство двора")
                     put(W_KEY_DATE, "2020-07-26")
-                    put(W_KEY_WORKER,"СК БРИЗ")
+                    put(W_KEY_WORKER, "СК БРИЗ")
                     put(W_KEY_STATE, 1)
                     put(W_KEY_HOUSE_ID, 2)
                 },
                 ContentValues().apply {
                     put(W_KEY_NAME, "Замена фонарных столбов")
                     put(W_KEY_DATE, "2017-08-10")
-                    put(W_KEY_WORKER,"СК БРИЗ")
+                    put(W_KEY_WORKER, "СК БРИЗ")
                     put(W_KEY_STATE, 0)
                     put(W_KEY_HOUSE_ID, 2)
                 },
                 ContentValues().apply {
                     put(W_KEY_NAME, "Ремонт дорожного покрытия")
                     put(W_KEY_DATE, "2017-08-01")
-                    put(W_KEY_WORKER,"Унистрой")
+                    put(W_KEY_WORKER, "Унистрой")
                     put(W_KEY_STATE, 1)
                     put(W_KEY_HOUSE_ID, 2)
                 },
                 ContentValues().apply {
                     put(W_KEY_NAME, "Плановый снос здания")
                     put(W_KEY_DATE, "2027-08-01")
-                    put(W_KEY_WORKER,"УК \"Пжкх\"")
+                    put(W_KEY_WORKER, "УК \"Пжкх\"")
                     put(W_KEY_STATE, 0)
                     put(W_KEY_HOUSE_ID, 0)
                 }

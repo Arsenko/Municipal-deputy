@@ -5,9 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.municipaldeputy.R
-import com.example.municipaldeputy.entity.Human
 import com.example.municipaldeputy.entity.Work
-import kotlinx.android.synthetic.main.item_human.view.*
 import kotlinx.android.synthetic.main.item_work.view.*
 import java.text.SimpleDateFormat
 
