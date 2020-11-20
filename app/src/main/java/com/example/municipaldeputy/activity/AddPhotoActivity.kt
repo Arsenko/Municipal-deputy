@@ -52,7 +52,15 @@ class AddPhotoActivity : AppCompatActivity() {
             )
         }
         preview_img.setOnClickListener {
-            onImageBtnClicked()
+            if (ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                Toast.makeText(this, R.string.permission_error, Toast.LENGTH_LONG).show()
+            } else {
+                onImageBtnClicked()
+            }
         }
         add_btn.setOnClickListener {
             onAddBtnClicked(spinner.selectedItem.toString())
@@ -67,20 +75,13 @@ class AddPhotoActivity : AppCompatActivity() {
                 preview_img.setImageDrawable(
                     fileService.getDrawable(selectedImageUri)
                 )
-                path=fileService.getPath(selectedImageUri)
+                path = fileService.getPath(selectedImageUri)
             }
         }
         super.onActivityResult(requestCode, resultCode, data)
     }
 
     fun onImageBtnClicked() {
-        if (ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.READ_EXTERNAL_STORAGE
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            Toast.makeText(this, R.string.permission_error, Toast.LENGTH_LONG).show()
-        }
         val intent = Intent()
         intent.type = "image/*"
         intent.action = Intent.ACTION_PICK
