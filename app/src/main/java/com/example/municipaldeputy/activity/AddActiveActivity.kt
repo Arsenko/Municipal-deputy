@@ -6,14 +6,14 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.municipaldeputy.R
 import com.example.municipaldeputy.entity.Human
 import com.example.municipaldeputy.sqlite.DBManager
-import kotlinx.android.synthetic.main.item_add_active.*
+import kotlinx.android.synthetic.main.activity_add_active.*
 
 class AddActiveActivity : AppCompatActivity() {
     private lateinit var dbManager: DBManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.item_add_active)
+        setContentView(R.layout.activity_add_active)
         init()
     }
 
@@ -37,7 +37,7 @@ class AddActiveActivity : AppCompatActivity() {
                     phone_number_edt.text.toString(),
                     mail_edt.text.toString()
                 ),
-                spinner.selectedItemPosition + 1
+                spinner.selectedItem.toString()
             )
         }
 

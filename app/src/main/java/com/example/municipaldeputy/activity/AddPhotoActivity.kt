@@ -13,7 +13,7 @@ import com.example.municipaldeputy.R
 import com.example.municipaldeputy.constants.REQUEST_CODE
 import com.example.municipaldeputy.service.FileService
 import com.example.municipaldeputy.sqlite.DBManager
-import kotlinx.android.synthetic.main.item_add_photo.*
+import kotlinx.android.synthetic.main.activity_add_photo.*
 
 class AddPhotoActivity : AppCompatActivity() {
     private lateinit var dbManager: DBManager
@@ -22,7 +22,7 @@ class AddPhotoActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.item_add_photo)
+        setContentView(R.layout.activity_add_photo)
         init()
     }
 
@@ -55,7 +55,7 @@ class AddPhotoActivity : AppCompatActivity() {
             onImageBtnClicked()
         }
         add_btn.setOnClickListener {
-            onAddBtnClicked(spinner.selectedItemPosition + 1)
+            onAddBtnClicked(spinner.selectedItem.toString())
         }
 
     }
@@ -92,9 +92,9 @@ class AddPhotoActivity : AppCompatActivity() {
         )
     }
 
-    fun onAddBtnClicked(houseId: Int) {
+    fun onAddBtnClicked(houseAddress: String) {
         if (path != null) {
-            DBManager(this).openRead().insertPhoto(path!!, houseId)
+            DBManager(this).openRead().insertPhoto(path!!, houseAddress)
             Toast.makeText(this, R.string.add_success, Toast.LENGTH_LONG).show()
         } else {
             Toast.makeText(this, R.string.pick_photo, Toast.LENGTH_LONG).show()

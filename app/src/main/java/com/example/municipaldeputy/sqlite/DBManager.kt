@@ -81,6 +81,25 @@ class DBManager(c: Context) {
         return false
     }
 
+    fun fetchRegionId(regionName: String): Int {
+        val cursor: Cursor? = database!!.query(
+            REGION_TABLE,
+            arrayOf(R_KEY_ID, R_KEY_NAME),
+            "$R_KEY_NAME = \"$regionName\"",
+            null,
+            null,
+            null,
+            null
+        )
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                return cursor.getInt(cursor.getColumnIndex(R_KEY_ID))
+            }
+            cursor.close()
+        }
+        return -1
+    }
+
     fun fetchDistrict(regionId: Int?): List<District> {
         var districtlist = mutableListOf<District>()
         val cursor: Cursor? = if (regionId != null) {
@@ -136,6 +155,26 @@ class DBManager(c: Context) {
             return true
         }
         return false
+    }
+
+    fun fetchDistrictId(districtName: String): Int {
+        val cursor: Cursor? =
+            database!!.query(
+                DISTINCT_TABLE,
+                arrayOf(D_KEY_ID),
+                "$D_KEY_NAME = \"$districtName\"",
+                null,
+                null,
+                null,
+                null
+            )
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                return cursor.getInt(cursor.getColumnIndex(D_KEY_ID))
+            }
+            cursor.close()
+        }
+        return -1
     }
 
     fun fetchStreet(districtId: Int?): List<Street> {
@@ -195,7 +234,7 @@ class DBManager(c: Context) {
         return false
     }
 
-    fun fetchStreetById(streetName: String):Int {
+    fun fetchStreetById(streetName: String): Int {
         val cursor: Cursor? =
             database!!.query(
                 STREET_TABLE,
@@ -291,6 +330,30 @@ class DBManager(c: Context) {
             return true
         }
         return false
+    }
+
+    fun fetchHouseId(houseAddress: String): Int {
+        var id: Int = -1
+        val cursor: Cursor? =
+            database!!.query(
+                HOUSE_TABLE,
+                arrayOf(
+                    H_KEY_ID
+                ),
+                "$H_KEY_ADDRESS = \"$houseAddress\"",
+                null,
+                null,
+                null,
+                null
+            )
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                id = cursor.getInt(cursor.getColumnIndex(H_KEY_ID))
+                cursor.close()
+            }
+
+        }
+        return id
     }
 
     fun fetchPhoto(houseId: Int): List<PhotoLink> {
@@ -449,17 +512,22 @@ class DBManager(c: Context) {
         if (cursor != null) {
             if (cursor.moveToFirst()) {
                 do {
+                    val str= cursor.getString(
+                        cursor.getColumnIndex(
+                            W_KEY_DATE
+                        )
+                    )
                     activeList.add(
                         Work(
                             cursor.getInt(cursor.getColumnIndex(W_KEY_ID)),
                             cursor.getString(cursor.getColumnIndex(W_KEY_NAME)),
-                            SimpleDateFormat("yyyy-mm-dd").parse(
+                            SimpleDateFormat("yyyy-MM-dd").parse(
                                 cursor.getString(
                                     cursor.getColumnIndex(
                                         W_KEY_DATE
                                     )
                                 )
-                            ),
+                            )!!,
                             cursor.getString(cursor.getColumnIndex(W_KEY_WORKER))
                         )
                     )
@@ -503,35 +571,32 @@ class DBManager(c: Context) {
         }
     }
 
-    fun insertDistrict(districtName: String, regionId: Int) {
+    fun insertDistrict(districtName: String, regionName: String) {
         if (fetchDistrict(districtName)) {
             Toast.makeText(this.context, R.string.already_exist, Toast.LENGTH_LONG).show()
         } else {
             val contentValue = ContentValues()
-            contentValue.put(D_KEY_REGION_ID, regionId)
+            contentValue.put(D_KEY_REGION_ID, fetchRegionId(regionName))
             contentValue.put(D_KEY_NAME, districtName)
             database!!.insert(DISTINCT_TABLE, null, contentValue)
             Toast.makeText(this.context, R.string.add_success, Toast.LENGTH_LONG).show()
         }
     }
 
-    fun insertStreet(streetName: String, districtId: Int) {
+    fun insertStreet(streetName: String, districtName: String) {
         if (fetchStreet(streetName)) {
             Toast.makeText(this.context, R.string.already_exist, Toast.LENGTH_LONG).show()
         } else {
             val contentValue = ContentValues()
-            contentValue.put(S_KEY_DISTINCT_ID, districtId)
+            contentValue.put(S_KEY_DISTINCT_ID, fetchDistrictId(districtName))
             contentValue.put(S_KEY_NAME, streetName)
             database!!.insert(STREET_TABLE, null, contentValue)
             Toast.makeText(this.context, R.string.add_success, Toast.LENGTH_LONG).show()
         }
     }
 
-    fun insertHouse(
-        house:House,
-        streetName: String
-    ) {
-        Toast.makeText(this.context,streetName,Toast.LENGTH_LONG).show()
+    fun insertHouse(house: House, streetName: String) {
+        Toast.makeText(this.context, streetName, Toast.LENGTH_LONG).show()
         if (fetchHouse(house.address)) {
             Toast.makeText(this.context, R.string.already_exist, Toast.LENGTH_LONG).show()
         } else {
@@ -549,25 +614,27 @@ class DBManager(c: Context) {
     fun insertWork(
         work: Work,
         workState: Boolean,
-        houseId: Int
+        houseAddress: String
     ) {
+        val houseId = fetchHouseId(houseAddress)
         if (fetchWork(work.name, houseId)) {
             Toast.makeText(this.context, R.string.already_exist, Toast.LENGTH_LONG).show()
         } else {
             val contentValue = ContentValues()
             contentValue.put(W_KEY_NAME, work.name)
-            contentValue.put(W_KEY_DATE, SimpleDateFormat("yyyy-mm-dd").format(work.date))
+            contentValue.put(W_KEY_DATE, SimpleDateFormat("yyyy-MM-dd").format(work.date))
             contentValue.put(W_KEY_WORKER, work.worker)
-            contentValue.put(W_KEY_STATE, workState)
+            when(workState){
+                true -> contentValue.put(W_KEY_STATE, 1)
+                false -> contentValue.put(W_KEY_STATE, 0)
+            }
+            contentValue.put(W_KEY_HOUSE_ID,houseId)
             database!!.insert(WORK_TABLE, null, contentValue)
             Toast.makeText(this.context, R.string.add_success, Toast.LENGTH_LONG).show()
         }
     }
 
-    fun insertActive(
-        human: Human,
-        houseId: Int
-    ) {
+    fun insertActive(human: Human, houseAddress: String) {
         if (fetchActive(human.mail, human.phoneNumber)) {
             Toast.makeText(this.context, R.string.already_exist, Toast.LENGTH_LONG).show()
         } else {
@@ -578,19 +645,19 @@ class DBManager(c: Context) {
             contentValue.put(A_KEY_PHONE_NUMBER, human.phoneNumber)
             contentValue.put(A_KEY_MAIL, human.mail)
             contentValue.put(A_KEY_APARTMENT_NUMBER, human.apartmentNumber)
-            contentValue.put(A_KEY_HOUSE_ID, houseId)
+            contentValue.put(A_KEY_HOUSE_ID, fetchHouseId(houseAddress))
             database!!.insert(ASSETS_TABLE, null, contentValue)
             Toast.makeText(this.context, R.string.add_success, Toast.LENGTH_LONG).show()
         }
     }
 
-    fun insertPhoto(photolink: String,houseId: Int) {
-        if(fetchPhoto(photolink)){
+    fun insertPhoto(photolink: String, houseAddress: String) {
+        if (fetchPhoto(photolink)) {
             Toast.makeText(this.context, R.string.already_exist, Toast.LENGTH_LONG).show()
-        }else{
+        } else {
             val contentValue = ContentValues()
-            contentValue.put(P_KEY_FILEPATH,photolink)
-            contentValue.put(P_KEY_HOUSE_ID,houseId)
+            contentValue.put(P_KEY_FILEPATH, photolink)
+            contentValue.put(P_KEY_HOUSE_ID, fetchHouseId(houseAddress))
             contentValue.put(P_KEY_IS_RESOURCE, 0)
             database!!.insert(PHOTO_TABLE, null, contentValue)
             Toast.makeText(this.context, R.string.add_success, Toast.LENGTH_LONG).show()

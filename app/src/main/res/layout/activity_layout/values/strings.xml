@@ -26,4 +26,19 @@
     <string name="permission_error">Permission error</string>
     <string name="add_work">Add Work</string>
     <string name="add_asset">Add Asset</string>
+    <string name="house_address">House address</string>
+    <string name="create_asset">Create_asset</string>
+    <string name="address_text">Address:</string>
+    <string name="number_of_floors_text">number of floors:</string>
+    <string name="number_of_entrances_text">number of entrances:</string>
+    <string name="developer_company_text">Developer company:</string>
+    <string name="full_name_text">Full name:</string>
+    <string name="apartment_number_text">Apartment number:</string>
+    <string name="phone_number_text">Phone number:</string>
+    <string name="mail_text">Mail:</string>
+    <string name="onstruction_company">Сonstruction company</string>
+    <string name="work_name">Work name</string>
+    <string name="done">done</string>
+    <string name="change">change</string>
+    <string name="date_text">Date:</string>
 </resources>

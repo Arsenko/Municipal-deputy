@@ -6,18 +6,14 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.municipaldeputy.R
 import com.example.municipaldeputy.entity.House
 import com.example.municipaldeputy.sqlite.DBManager
-import kotlinx.android.synthetic.main.activity_house_list.*
-import kotlinx.android.synthetic.main.item_add_district.view.*
-import kotlinx.android.synthetic.main.item_add_house.*
-import kotlinx.android.synthetic.main.item_add_house.view.*
-import kotlinx.android.synthetic.main.item_add_region.view.*
+import kotlinx.android.synthetic.main.activity_add_house.*
 
 class AddHouseActivity: AppCompatActivity() {
     private lateinit var dbManager: DBManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.item_add_house)
+        setContentView(R.layout.activity_add_house)
         init()
     }
 

@@ -6,28 +6,36 @@ import android.database.Cursor
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.provider.MediaStore
+import androidx.core.content.ContextCompat
 import com.example.municipaldeputy.R
 import com.example.municipaldeputy.sqlite.DBManager
 
 
 class FileService(val context: Context) {
     private var dbManager: DBManager = DBManager(context)
-    init{
+
+    init {
         dbManager.open()
     }
-    fun getPhotoList(houseId:Int):List<Drawable>{
-        val listOfDrawable= mutableListOf<Drawable>()
-        val linkList=dbManager.fetchPhoto(houseId)
-        for(item in linkList){
-            if(item.isResource==1){
+
+    fun getPhotoList(houseId: Int): List<Drawable> {
+        val listOfDrawable = mutableListOf<Drawable>()
+        val linkList = dbManager.fetchPhoto(houseId)
+        for (item in linkList) {
+            if (item.isResource == 1) {
                 listOfDrawable.add(
-                    context.getDrawable(
+                    ContextCompat.getDrawable(
+                        context,
                         context.getResources()
                             .getIdentifier(item.link, "drawable", context.packageName)
                     )!!
                 )
-            }else{
-                Drawable.createFromPath(item.link)?.let { listOfDrawable.add(it) }
+            } else {
+                var tempdrawable =
+                    Drawable.createFromPath(item.link) //проверка на существование картинки
+                if (tempdrawable != null) {
+                    listOfDrawable.add(tempdrawable)
+                }
             }
         }
         return listOfDrawable.toList()
@@ -38,7 +46,9 @@ class FileService(val context: Context) {
         val cursor: Cursor = context.getContentResolver().query(uri, projection, null, null, null)!!
         val column_index: Int = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
         cursor.moveToFirst()
-        return cursor.getString(column_index)
+        val returnvalue=cursor.getString(column_index)
+        cursor.close()
+        return returnvalue
     }
 
     fun getDrawable(selectedImageUri: Uri): Drawable? {

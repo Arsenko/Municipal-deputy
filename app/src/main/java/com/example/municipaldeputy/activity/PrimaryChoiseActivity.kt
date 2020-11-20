@@ -52,6 +52,7 @@ class PrimaryChoiseActivity : AppCompatActivity() {
     }
 
     private fun refreshDistrict(id: Int) {
+        dbManager.open()
         val districtlist = dbManager.fetchDistrict(id)
         val districtAdapter =
             ArrayAdapter(this, R.layout.multiline_spinner_dropdown_item, districtlist)
@@ -75,6 +76,7 @@ class PrimaryChoiseActivity : AppCompatActivity() {
     }
 
     private fun refreshStreet(id: Int) {
+        dbManager.open()
         streetlist = dbManager.fetchStreet(id)
         val streetAdapter = ArrayAdapter(this, R.layout.multiline_spinner_dropdown_item, streetlist)
         streetAdapter.setDropDownViewResource(R.layout.multiline_spinner_dropdown_item)

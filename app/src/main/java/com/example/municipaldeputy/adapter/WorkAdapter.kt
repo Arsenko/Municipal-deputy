@@ -33,7 +33,7 @@ class WorkViewHolder(view: View):RecyclerView.ViewHolder(view)  {
     fun bind(item: Work) {
         with(itemView){
             work_name.text=item.name
-            work_date.text=SimpleDateFormat("dd.mm.yyyy").format(item.date)
+            work_date.text=SimpleDateFormat("dd.MM.yyyy").format(item.date)
             worker_name.text=item.worker
         }
     }

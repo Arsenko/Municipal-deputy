@@ -5,14 +5,14 @@ import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import com.example.municipaldeputy.R
 import com.example.municipaldeputy.sqlite.DBManager
-import kotlinx.android.synthetic.main.item_add_district.*
+import kotlinx.android.synthetic.main.activity_add_district.*
 
 class AddDistrictActivity: AppCompatActivity() {
     private lateinit var dbManager: DBManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.item_add_district)
+        setContentView(R.layout.activity_add_district)
         init()
     }
 
@@ -28,7 +28,7 @@ class AddDistrictActivity: AppCompatActivity() {
         add_btn.setOnClickListener {
             dbManager.insertDistrict(
                 district_name_edt.text.toString(),
-                spinner.selectedItemPosition + 1//пока нет удаления = id
+                spinner.selectedItem.toString()
             )
         }
 

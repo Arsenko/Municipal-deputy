@@ -9,7 +9,7 @@
         android:id="@+id/create_asset_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Create_asset"
+        android:text="@string/create_asset"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -64,7 +64,7 @@
 
     <EditText
         android:id="@+id/apartment_number_edt"
-        android:layout_width="220dp"
+        android:layout_width="wrap_content"
         android:layout_height="51dp"
         android:ems="10"
         android:hint="@string/apartment_number"
@@ -106,7 +106,7 @@
         android:id="@+id/add_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/add_house"
+        android:text="@string/add_asset"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

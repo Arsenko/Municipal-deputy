@@ -22,13 +22,13 @@ class WorkActivity : AppCompatActivity() {
         if (intent.hasExtra("id")) {
             dbManager = DBManager(this)
             dbManager.open()
-            val houseList = dbManager.fetchWork(
+            val workList = dbManager.fetchWork(
                 intent.getIntExtra("id", -1),
                 intent.getBooleanExtra("done", false)
             )
             with(container) {
                 layoutManager = LinearLayoutManager(this@WorkActivity)
-                adapter = WorkAdapter(houseList)
+                adapter = WorkAdapter(workList)
             }
         }
 

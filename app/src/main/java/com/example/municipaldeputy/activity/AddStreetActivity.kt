@@ -5,18 +5,14 @@ import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import com.example.municipaldeputy.R
 import com.example.municipaldeputy.sqlite.DBManager
-import kotlinx.android.synthetic.main.activity_house_list.*
-import kotlinx.android.synthetic.main.item_add_district.view.*
-import kotlinx.android.synthetic.main.item_add_region.view.*
-import kotlinx.android.synthetic.main.item_add_street.*
-import kotlinx.android.synthetic.main.item_add_street.view.*
+import kotlinx.android.synthetic.main.activity_add_street.*
 
 class AddStreetActivity: AppCompatActivity() {
     private lateinit var dbManager: DBManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.item_add_street)
+        setContentView(R.layout.activity_add_street)
         init()
     }
 
@@ -32,7 +28,7 @@ class AddStreetActivity: AppCompatActivity() {
         add_btn.setOnClickListener {
             dbManager.insertStreet(
                 street_name_edt.text.toString(),
-                spinner.selectedItemPosition + 1
+                spinner.selectedItem.toString()
             )
         }
 

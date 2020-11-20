@@ -1,6 +1,5 @@
 package com.example.municipaldeputy.entity
 
-import java.time.LocalDate
 import java.util.*
 
 class Work(

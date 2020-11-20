@@ -19,39 +19,28 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Work name"
+        android:hint="@string/work_name"
         android:importantForAutofill="no"
         android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/work_date_edt"
+        app:layout_constraintBottom_toTopOf="@+id/work_date_vtext"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner" />
-
-    <EditText
-        android:id="@+id/work_date_edt"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Work date"
-        android:importantForAutofill="no"
-        android:inputType="date"
-        app:layout_constraintBottom_toTopOf="@+id/construction_company_edt"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/work_name_edt" />
 
     <EditText
         android:id="@+id/construction_company_edt"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Сonstruction company"
+        android:hint="@string/onstruction_company"
         android:importantForAutofill="no"
         android:inputType="text"
         app:layout_constraintBottom_toTopOf="@+id/done_chbx"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/work_date_edt" />
+        app:layout_constraintTop_toBottomOf="@+id/work_date_vtext" />
 
     <Spinner
         android:id="@+id/spinner"
@@ -59,6 +48,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/work_name_edt"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/create_work_text" />
 
@@ -66,7 +56,7 @@
         android:id="@+id/add_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/add_house"
+        android:text="@string/add_work"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -75,10 +65,40 @@
         android:id="@+id/done_chbx"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="done"
+        android:text="@string/done"
         app:layout_constraintBottom_toTopOf="@+id/add_btn"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/construction_company_edt" />
+
+    <Button
+        android:id="@+id/change_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/change"
+        app:layout_constraintBottom_toTopOf="@+id/construction_company_edt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/work_date_vtext"
+        app:layout_constraintTop_toBottomOf="@+id/work_name_edt" />
+
+    <TextView
+        android:id="@+id/work_date_vtext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/construction_company_edt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/work_name_edt" />
+
+    <TextView
+        android:id="@+id/date_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/date_text"
+        app:layout_constraintBottom_toTopOf="@+id/construction_company_edt"
+        app:layout_constraintEnd_toStartOf="@+id/work_date_vtext"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/work_name_edt" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

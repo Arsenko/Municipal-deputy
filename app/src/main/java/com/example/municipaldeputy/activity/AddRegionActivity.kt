@@ -2,20 +2,16 @@ package com.example.municipaldeputy.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.municipaldeputy.R
-import com.example.municipaldeputy.adapter.HouseAdapter
 import com.example.municipaldeputy.sqlite.DBManager
-import kotlinx.android.synthetic.main.activity_house_list.*
-import kotlinx.android.synthetic.main.item_add_region.*
-import kotlinx.android.synthetic.main.item_add_region.view.*
+import kotlinx.android.synthetic.main.activity_add_region.*
 
 class AddRegionActivity : AppCompatActivity() {
     private lateinit var dbManager: DBManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.item_add_region)
+        setContentView(R.layout.activity_add_region)
         init()
     }
 

@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp">
 
     <TextView
         android:id="@+id/house_address"
@@ -13,7 +14,8 @@
         android:padding="5dp"
         app:layout_constraintBottom_toTopOf="@+id/house_floors"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/address_text"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="дом какой-то" />
 
@@ -23,9 +25,10 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:padding="5dp"
-        app:layout_constraintBottom_toTopOf="@+id/house_management_company"
+        app:layout_constraintBottom_toTopOf="@+id/house_entrances"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/number_of_floors_text"
         app:layout_constraintTop_toBottomOf="@+id/house_address"
         tools:text="этажей много" />
 
@@ -35,9 +38,11 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:padding="5dp"
+        app:layout_constraintBottom_toTopOf="@+id/house_management_company"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/house_management_company"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/number_of_entrances_text"
+        app:layout_constraintTop_toBottomOf="@+id/house_floors"
         tools:text="подъездов мало" />
 
     <TextView
@@ -46,10 +51,10 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:padding="5dp"
-        app:layout_constraintBottom_toTopOf="@+id/house_entrances"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/house_floors"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/managment_company_text"
         tools:text="застройщик такой-то" />
 
     <TextView
@@ -59,4 +64,48 @@
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/address_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:padding="5dp"
+        android:text="@string/address_text"
+        app:layout_constraintBottom_toTopOf="@+id/number_of_floors_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/number_of_floors_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:padding="5dp"
+        android:text="@string/number_of_floors_text"
+        app:layout_constraintBottom_toTopOf="@+id/number_of_entrances_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/address_text" />
+
+    <TextView
+        android:id="@+id/number_of_entrances_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:padding="5dp"
+        android:text="@string/number_of_entrances_text"
+        app:layout_constraintBottom_toTopOf="@+id/managment_company_text"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/number_of_floors_text" />
+
+    <TextView
+        android:id="@+id/managment_company_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:padding="5dp"
+        android:text="@string/developer_company_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
