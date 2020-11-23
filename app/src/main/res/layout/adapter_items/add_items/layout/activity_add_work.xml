@@ -33,7 +33,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="@string/onstruction_company"
+        android:hint="@string/сonstruction_company"
         android:importantForAutofill="no"
         android:inputType="text"
         app:layout_constraintBottom_toTopOf="@+id/done_chbx"

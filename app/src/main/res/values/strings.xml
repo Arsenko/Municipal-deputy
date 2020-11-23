@@ -1,7 +1,0 @@
-<resources>
-    <string name="app_name">Municipal deputy</string>
-    <string name="move_to_homelist">move to homelist</string>
-    <string name="region_name">Region name</string>
-    <string name="create_region">Create region</string>
-    <string name="add_region">Add region</string>
-</resources>

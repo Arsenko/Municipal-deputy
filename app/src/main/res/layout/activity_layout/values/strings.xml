@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">Municipal deputy</string>
+    <string name="move_to_homelist">move to homelist</string>
+    <string name="region_name">Region name</string>
+    <string name="create_region">Create region</string>
+    <string name="add_region">Add region</string>
     <string name="add_district">Add District</string>
     <string name="add_street">Add Street</string>
     <string name="street_name">Street name</string>
@@ -36,9 +41,11 @@
     <string name="apartment_number_text">Apartment number:</string>
     <string name="phone_number_text">Phone number:</string>
     <string name="mail_text">Mail:</string>
-    <string name="onstruction_company">Сonstruction company</string>
+    <string name="сonstruction_company">Сonstruction company</string>
     <string name="work_name">Work name</string>
     <string name="done">done</string>
     <string name="change">change</string>
     <string name="date_text">Date:</string>
+    <string name="add_to_database">Add to database</string>
+    <string name="browse_data">Browse data</string>
 </resources>

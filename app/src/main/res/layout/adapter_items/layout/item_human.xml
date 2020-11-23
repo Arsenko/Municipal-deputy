@@ -14,7 +14,7 @@
         android:padding="5dp"
         app:layout_constraintBottom_toTopOf="@+id/apartment_number"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/full_name_text"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="ФИО" />
 
@@ -26,7 +26,7 @@
         android:padding="5dp"
         app:layout_constraintBottom_toTopOf="@+id/phone_number"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/apartment_number_text"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/full_name"
         tools:text="Квартира такая-то" />
 
@@ -38,7 +38,7 @@
         android:padding="5dp"
         app:layout_constraintBottom_toTopOf="@+id/mail"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/phone_number_text"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/apartment_number"
         tools:text="телефон есть" />
 
@@ -47,11 +47,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:layout_marginStart="203dp"
         android:padding="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/mail_text"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/phone_number"
         tools:text="ящик присутствует" />
 
@@ -99,4 +98,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/phone_number_text" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="180dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
