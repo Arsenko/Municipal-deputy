@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Муниципалный депутат</string>
+    <string name="app_name">Муниципальный депутат</string>
     <string name="move_to_homelist">Перейти к списку домов</string>
     <string name="region_name">Название района</string>
     <string name="create_region">Создать район</string>
@@ -10,7 +10,7 @@
     <string name="street_name">Название улицы</string>
     <string name="create_street">Создать улицу</string>
     <string name="district_name">Название округа</string>
-    <string name="create_district">Создать улицу</string>
+    <string name="create_district">Создать округ</string>
     <string name="create_house">Создать дом</string>
     <string name="add_house">Добавить дом</string>
     <string name="number_of_entrances">Количество подъездов</string>
@@ -26,10 +26,10 @@
     <string name="create_photo">Создать запись о фото</string>
     <string name="add_photo">Добавить запись о фото</string>
     <string name="already_exist">Уже существет</string>
-    <string name="add_success">Успешно добавленно!</string>
+    <string name="add_success">Успешно добавлено!</string>
     <string name="pick_photo">Выберите фото</string>
     <string name="permission_error">Ошибка привелегий</string>
-    <string name="add_work">Добаввить работу</string>
+    <string name="add_work">Добавить работу</string>
     <string name="add_asset">Добавить актив</string>
     <string name="house_address">Адрес дома</string>
     <string name="create_asset">Создать актив</string>
@@ -41,11 +41,17 @@
     <string name="apartment_number_text">Номер квартиры:</string>
     <string name="phone_number_text">Номер телефона:</string>
     <string name="mail_text">Адрес электронной почты:</string>
-    <string name="сonstruction_company">Уравляющая компания</string>
+    <string name="сonstruction_company">Управляющая компания</string>
     <string name="work_name">Наименование работы</string>
     <string name="done">Выполнено</string>
     <string name="change">Изменить</string>
     <string name="date_text">Дата:</string>
     <string name="add_to_database">Добавить в базу данных</string>
     <string name="browse_data">Просмотреть информацию</string>
+    <string name="incorrect_input">Не кореектный ввод</string>
+    <string name="house_foto">Фотографии дома</string>
+    <string name="active_list">Список актива</string>
+    <string name="done_improvement_works">Выполненые работы по благоустройству</string>
+    <string name="undone_improvement_works">Не выполненые работы по благоустройству</string>
+    <string name="select_option">Выберите опцию</string>
 </resources>

@@ -6,16 +6,17 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.municipaldeputy.R
 import com.example.municipaldeputy.entity.District
 import com.example.municipaldeputy.entity.Region
 import com.example.municipaldeputy.entity.Street
-import com.example.municipaldeputy.sqlite.DBManager
+import com.example.municipaldeputy.sqlite.RoomViewModel
 import kotlinx.android.synthetic.main.activity_primary_choise.*
 
 class PrimaryChoiseActivity : AppCompatActivity() {
-    private lateinit var dbManager: DBManager
-    lateinit var streetlist:List<Street>
+    private lateinit var roomViewModel: RoomViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,14 +25,18 @@ class PrimaryChoiseActivity : AppCompatActivity() {
     }
 
     private fun init() {
-        dbManager = DBManager(applicationContext)
-        dbManager.open()
+        roomViewModel = ViewModelProvider(this).get(RoomViewModel::class.java)
         btn_to_house_list.setOnClickListener {
             toHomeListClick()
         }
-        val list = dbManager.fetchRegion()
-        var regionAdapter = ArrayAdapter(this, R.layout.multiline_spinner_dropdown_item, list)
+        var regionAdapter = ArrayAdapter<Region>(
+            this,
+            R.layout.multiline_spinner_item
+        )
         regionAdapter.setDropDownViewResource(R.layout.multiline_spinner_dropdown_item)
+        roomViewModel.getRegionData().observe(this, Observer {
+            regionAdapter.addAll(it as List<Region>)
+        })
         val regionSpinner = region_spinner
         regionSpinner.adapter = regionAdapter
         regionSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -52,35 +57,45 @@ class PrimaryChoiseActivity : AppCompatActivity() {
     }
 
     private fun refreshDistrict(id: Int) {
-        dbManager.open()
-        val districtlist = dbManager.fetchDistrict(id)
         val districtAdapter =
-            ArrayAdapter(this, R.layout.multiline_spinner_dropdown_item, districtlist)
+            ArrayAdapter<District>(
+                this,
+                R.layout.multiline_spinner_item
+            )
         districtAdapter.setDropDownViewResource(R.layout.multiline_spinner_dropdown_item)
+        roomViewModel.getDistrictByRegionId(id).observe(this, Observer {
+            districtAdapter.addAll(it as List<District>)
+        })
         val districtSpinner = district_spinner
         districtSpinner.adapter = districtAdapter
-        districtSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                val selectedItem = parent?.getItemAtPosition(position) as District
-                refreshStreet(selectedItem.id!!)
-            }
+        districtSpinner.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    val selectedItem = parent?.getItemAtPosition(position) as District
+                    refreshStreet(selectedItem.id!!)
+                }
 
-            override fun onNothingSelected(parent: AdapterView<*>?) {
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                }
             }
-        }
     }
 
     private fun refreshStreet(id: Int) {
-        dbManager.open()
-        streetlist = dbManager.fetchStreet(id)
-        val streetAdapter = ArrayAdapter(this, R.layout.multiline_spinner_dropdown_item, streetlist)
+        val streetAdapter = ArrayAdapter<Street>(
+            this,
+            R.layout.multiline_spinner_item
+        )
         streetAdapter.setDropDownViewResource(R.layout.multiline_spinner_dropdown_item)
         val streetSpinner = street_spinner
+
+        roomViewModel.getStreetWithDistrictId(id).observe(this, Observer {
+            streetAdapter.addAll(it as List<Street>)
+        })
         streetSpinner.adapter = streetAdapter
         streetSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
@@ -92,8 +107,10 @@ class PrimaryChoiseActivity : AppCompatActivity() {
                 if (intent.hasExtra("id")) {
                     intent.removeExtra("id")
                 }
-                intent.putExtra("id", streetlist[position].id)
+                val selectedItem = parent?.selectedItem as Street
+                intent.putExtra("id", selectedItem.id!!)
             }
+
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
         }
@@ -103,6 +120,5 @@ class PrimaryChoiseActivity : AppCompatActivity() {
         val toHouseList = Intent(applicationContext, HouseListActivity::class.java)
         toHouseList.putExtra("id", intent.getIntExtra("id", -1))
         startActivity(toHouseList)
-        dbManager.close()
     }
 }

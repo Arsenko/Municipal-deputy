@@ -9,14 +9,18 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.municipaldeputy.R
 import com.example.municipaldeputy.constants.REQUEST_CODE
+import com.example.municipaldeputy.entity.House
+import com.example.municipaldeputy.entity.PhotoLink
 import com.example.municipaldeputy.service.FileService
-import com.example.municipaldeputy.sqlite.DBManager
+import com.example.municipaldeputy.sqlite.RoomViewModel
 import kotlinx.android.synthetic.main.activity_add_photo.*
 
 class AddPhotoActivity : AppCompatActivity() {
-    private lateinit var dbManager: DBManager
+    private lateinit var roomViewModel: RoomViewModel
     private lateinit var fileService: FileService
     private var path: String? = null
 
@@ -27,16 +31,20 @@ class AddPhotoActivity : AppCompatActivity() {
     }
 
     private fun init() {
-        dbManager = DBManager(this)
-        dbManager.openRead()
-        fileService = FileService(this)
-        spinner.adapter =
-            ArrayAdapter(
+        roomViewModel = ViewModelProvider(this).get(RoomViewModel::class.java)
+        fileService = FileService(this,roomViewModel)
+        val spinnerAdapter =
+            ArrayAdapter<House>(
                 this,
-                R.layout.multiline_spinner_dropdown_item,
-                dbManager.fetchHouse(null)
+                R.layout.multiline_spinner_item
             )
-
+        spinnerAdapter.setDropDownViewResource(R.layout.multiline_spinner_dropdown_item)
+        roomViewModel.getHouseData().observe(this,
+            Observer {
+                spinnerAdapter.addAll(it)
+            }
+        )
+        spinner.adapter=spinnerAdapter
         if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.READ_EXTERNAL_STORAGE
@@ -63,7 +71,7 @@ class AddPhotoActivity : AppCompatActivity() {
             }
         }
         add_btn.setOnClickListener {
-            onAddBtnClicked(spinner.selectedItem.toString())
+            onAddBtnClicked()
         }
 
     }
@@ -93,9 +101,11 @@ class AddPhotoActivity : AppCompatActivity() {
         )
     }
 
-    fun onAddBtnClicked(houseAddress: String) {
+    fun onAddBtnClicked() {
+        val link=path!!
+        val houseId= (roomViewModel.getHouseIdByName(spinner.selectedItem.toString()) as House).id
         if (path != null) {
-            DBManager(this).openRead().insertPhoto(path!!, houseAddress)
+            roomViewModel.addPhoto(PhotoLink(0,link,0, houseId))
             Toast.makeText(this, R.string.add_success, Toast.LENGTH_LONG).show()
         } else {
             Toast.makeText(this, R.string.pick_photo, Toast.LENGTH_LONG).show()

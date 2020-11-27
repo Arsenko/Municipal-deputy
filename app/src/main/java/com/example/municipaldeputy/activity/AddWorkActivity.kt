@@ -4,19 +4,24 @@ import android.app.DatePickerDialog
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.DatePicker
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.example.municipaldeputy.R
+import androidx.lifecycle.Observer
+import com.example.municipaldeputy.entity.House
 import com.example.municipaldeputy.entity.Work
-import com.example.municipaldeputy.sqlite.DBManager
+import com.example.municipaldeputy.sqlite.RoomViewModel
 import kotlinx.android.synthetic.main.activity_add_work.*
+import kotlinx.android.synthetic.main.activity_add_work.work_date_vtext
+import kotlinx.android.synthetic.main.item_work.*
 import java.text.SimpleDateFormat
-import java.time.LocalDate
 import java.util.*
 
 
 class AddWorkActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
-    private lateinit var dbManager: DBManager
-    var selectedDate=Date()
+    private lateinit var roomViewModel: RoomViewModel
+    var selectedDate = Date()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,26 +30,21 @@ class AddWorkActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener 
     }
 
     private fun init() {
+        roomViewModel = ViewModelProvider(this).get(RoomViewModel::class.java)
         updateDate()
-        dbManager = DBManager(this)
-        dbManager.openRead()
-        spinner.adapter =
-            ArrayAdapter(
+        var spinnerAdapter =
+            ArrayAdapter<House>(
                 this,
-                R.layout.multiline_spinner_dropdown_item,
-                dbManager.fetchHouse(null)
+                R.layout.multiline_spinner_dropdown_item
             )
+
+        roomViewModel.getHouseData().observe(this, Observer {
+            spinnerAdapter.addAll(it)
+        }
+        )
+        spinner.adapter = spinnerAdapter
         add_btn.setOnClickListener {
-            dbManager.insertWork(
-                Work(
-                    null,
-                    work_name_edt.text.toString(),
-                    selectedDate,
-                    construction_company_edt.text.toString()
-                ),
-                done_chbx.isChecked,
-                spinner.selectedItem.toString()
-            )
+            addClick()
         }
         val cal = Calendar.getInstance(TimeZone.getTimeZone("Europe/Moscow"))
         cal.time = selectedDate
@@ -71,7 +71,36 @@ class AddWorkActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener 
         updateDate()
     }
 
-    fun updateDate() {
+    private fun updateDate() {
         work_date_vtext.text = SimpleDateFormat("dd.M.yyyy").format(selectedDate)
+    }
+
+    private fun addClick() {
+        val workName = work_name_edt.text.toString()
+        val workDate = work_date_vtext.text.toString()
+        val worker = construction_company_edt.text.toString()
+
+        val workdone = if (done_chbx.isChecked) {
+            1
+        } else {
+            0
+        }
+        val houseId = (roomViewModel.getHouseIdByName(spinner.selectedItem.toString()) as House).id
+        if (inputCheck(workName, workDate, worker, houseId)) {
+            roomViewModel.addWork(Work(0, workName, workDate, worker, workdone, houseId))
+            Toast.makeText(this, getString(R.string.add_success), Toast.LENGTH_LONG).show()
+        } else {
+            Toast.makeText(this, getString(R.string.incorrect_input), Toast.LENGTH_LONG).show()
+        }
+
+    }
+
+    private fun inputCheck(
+        workName: String,
+        workDate: String,
+        worker: String,
+        houseId: Int
+    ): Boolean {
+        return !(workName.isEmpty() && workDate.isEmpty() && worker.isEmpty() && houseId < 0)
     }
 }

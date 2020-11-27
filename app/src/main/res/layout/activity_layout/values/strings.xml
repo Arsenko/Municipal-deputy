@@ -48,4 +48,10 @@
     <string name="date_text">Date:</string>
     <string name="add_to_database">Add to database</string>
     <string name="browse_data">Browse data</string>
+    <string name="incorrect_input">Incorrect input</string>
+    <string name="house_foto">House foto</string>
+    <string name="active_list">Active list</string>
+    <string name="done_improvement_works">Done improvement works</string>
+    <string name="undone_improvement_works">Undone improvement works</string>
+    <string name="select_option">Select option</string>
 </resources>

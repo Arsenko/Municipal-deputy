@@ -8,9 +8,9 @@ import com.example.municipaldeputy.R
 import com.example.municipaldeputy.entity.Human
 import kotlinx.android.synthetic.main.item_human.view.*
 
-class ActiveAdapter(val list: List<Human>) :
+class ActiveAdapter() :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
+    var list: MutableList<Human> = mutableListOf()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val view: View = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_human, parent, false)

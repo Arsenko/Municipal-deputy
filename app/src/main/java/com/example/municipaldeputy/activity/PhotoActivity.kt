@@ -5,14 +5,17 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.ViewModelProvider
 import com.example.municipaldeputy.R
 import com.example.municipaldeputy.adapter.PhotoAdapter
 import com.example.municipaldeputy.constants.REQUEST_CODE
 import com.example.municipaldeputy.service.FileService
+import com.example.municipaldeputy.sqlite.RoomViewModel
 import kotlinx.android.synthetic.main.activity_photo.*
 
 class PhotoActivity : FragmentActivity() {
     private lateinit var fileService:FileService
+    private lateinit var roomViewModel: RoomViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,6 +24,7 @@ class PhotoActivity : FragmentActivity() {
     }
 
     private fun init() {
+        roomViewModel = ViewModelProvider(this).get(RoomViewModel::class.java)
         if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.READ_EXTERNAL_STORAGE
@@ -36,7 +40,7 @@ class PhotoActivity : FragmentActivity() {
             )
         }//можно не принять, тогда будут только ресурсы
         if (intent.hasExtra("id")) {
-            fileService= FileService(applicationContext)
+            fileService= FileService(applicationContext,roomViewModel)
             val list=fileService.getPhotoList(intent.getIntExtra("id",-1))
             container.adapter= PhotoAdapter(list)
         }

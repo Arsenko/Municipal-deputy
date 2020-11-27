@@ -7,7 +7,6 @@ import com.example.municipaldeputy.R
 import kotlinx.android.synthetic.main.activity_add.*
 
 class AddActivity : AppCompatActivity(){
-    var path:String?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add)

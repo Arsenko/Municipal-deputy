@@ -1,27 +1,21 @@
 package com.example.municipaldeputy.service
 
 import android.content.Context
-import android.content.pm.PackageManager
 import android.database.Cursor
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.provider.MediaStore
 import androidx.core.content.ContextCompat
-import com.example.municipaldeputy.R
-import com.example.municipaldeputy.sqlite.DBManager
+import com.example.municipaldeputy.entity.PhotoLink
+import com.example.municipaldeputy.sqlite.RoomViewModel
 
 
-class FileService(val context: Context) {
-    private var dbManager: DBManager = DBManager(context)
-
-    init {
-        dbManager.open()
-    }
+class FileService(val context: Context,var roomViewModel:RoomViewModel) {
 
     fun getPhotoList(houseId: Int): List<Drawable> {
         val listOfDrawable = mutableListOf<Drawable>()
-        val linkList = dbManager.fetchPhoto(houseId)
-        for (item in linkList) {
+        val linkList = roomViewModel.getPhotoWithHouseIdSync(houseId) as List<PhotoLink>
+        for(item in linkList){
             if (item.isResource == 1) {
                 listOfDrawable.add(
                     ContextCompat.getDrawable(
