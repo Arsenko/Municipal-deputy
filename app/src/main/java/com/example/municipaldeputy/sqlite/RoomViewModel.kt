@@ -7,6 +7,7 @@ import com.example.municipaldeputy.entity.*
 import com.example.municipaldeputy.sqlite.repository.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class RoomViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -27,21 +28,21 @@ class RoomViewModel(application: Application) : AndroidViewModel(application) {
         photoRepository = PhotoRepository(database.photoDao())
         workRepository = WorkRepository(database.workDao())
         activeRepository = ActiveRepository(database.humanDao())
-        if(checkRegionEmpty()){
+        if (checkRegionEmpty()) {//TODO remove while have a data sample
             addDebugList()
         }
     }
-    fun checkRegionEmpty():Boolean{
+
+    fun checkRegionEmpty(): Boolean {//TODO remove while have a data sample
         return regionRepository.readAllDataSync().isEmpty()
     }
+
     //region
     fun getRegionData() =
         regionRepository.readAllData()
 
-    fun addRegion(region: Region) {
-        viewModelScope.launch(Dispatchers.IO) {
-            regionRepository.addRegion(region)
-        }
+    suspend fun addRegion(region: Region): Long {
+        return regionRepository.addRegion(region)
     }
 
     fun getRegionIdByName(regionName: String) =
@@ -53,11 +54,7 @@ class RoomViewModel(application: Application) : AndroidViewModel(application) {
     fun getDistrictData() =
         districtRepository.readAllData()
 
-    fun addDistrict(district: District) {
-        viewModelScope.launch(Dispatchers.IO) {
-            districtRepository.addDistrict(district)
-        }
-    }
+    suspend fun addDistrict(district: District) = districtRepository.addDistrict(district)
 
     fun getDistrictByRegionId(refionId: Int) = districtRepository.readDataWithRegionId(refionId)
 
@@ -68,11 +65,7 @@ class RoomViewModel(application: Application) : AndroidViewModel(application) {
     fun getStreetData() =
         streetRepository.readAllData()
 
-    fun addStreet(street: Street) {
-        viewModelScope.launch(Dispatchers.IO) {
-            streetRepository.addStreet(street)
-        }
-    }
+    suspend fun addStreet(street: Street) = streetRepository.addStreet(street)
 
     fun getStreetWithDistrictId(districtId: Int) =
         streetRepository.readDataWithDistrictId(districtId)
@@ -86,11 +79,7 @@ class RoomViewModel(application: Application) : AndroidViewModel(application) {
 
     fun getHouseWithStreetId(streetId: Int) = houseRepository.readDataWithStreetId(streetId)
 
-    fun addHouse(house: House) {
-        viewModelScope.launch(Dispatchers.IO) {
-            houseRepository.addHouse(house)
-        }
-    }
+    suspend fun addHouse(house: House) = houseRepository.addHouse(house)
 
     fun getHouseIdByName(houseAddress: String) =
         houseRepository.getIdByName(houseAddress)
@@ -99,11 +88,8 @@ class RoomViewModel(application: Application) : AndroidViewModel(application) {
     fun getPhotoDataSync() =
         photoRepository.readAllData()
 
-    fun addPhoto(photoLink: PhotoLink) {
-        viewModelScope.launch(Dispatchers.IO) {
+    suspend fun addPhoto(photoLink: PhotoLink) =
             photoRepository.addPhoto(photoLink)
-        }
-    }
 
     fun getPhotoWithHouseIdSync(houseId: Int) =
         photoRepository.getDataWithHouseIdSync(houseId)
@@ -112,11 +98,8 @@ class RoomViewModel(application: Application) : AndroidViewModel(application) {
     fun getWorkData() =
         workRepository.readAllData()
 
-    fun addWork(work: Work) {
-        viewModelScope.launch(Dispatchers.IO) {
+    suspend fun addWork(work: Work) =
             workRepository.addWork(work)
-        }
-    }
 
     fun getUndoneDataWithHouseId(houseId: Int) = workRepository.readUndoneDataWithHouseID(houseId)
 
@@ -128,11 +111,8 @@ class RoomViewModel(application: Application) : AndroidViewModel(application) {
 
     fun getActiveDataByHouseId(id: Int) = activeRepository.readDataWithHouseId(id)
 
-    fun addActive(human: Human) {
-        viewModelScope.launch(Dispatchers.IO) {
+    suspend fun addActive(human: Human) =
             activeRepository.addActive(human)
-        }
-    }
 
     private fun addDebugList() {
         viewModelScope.launch(Dispatchers.IO) {

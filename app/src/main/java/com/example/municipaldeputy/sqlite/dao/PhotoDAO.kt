@@ -13,7 +13,7 @@ import com.example.municipaldeputy.entity.PhotoLink
 @Dao
 interface PhotoDAO {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun add(photoLink: PhotoLink)
+    suspend fun add(photoLink: PhotoLink) :Long
 
     @Query("SELECT * FROM $PHOTO_TABLE ORDER BY $P_KEY_ID ASC")
     fun readAllDataSync(): List<PhotoLink>

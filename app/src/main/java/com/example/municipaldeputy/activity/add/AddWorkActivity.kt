@@ -1,6 +1,7 @@
-package com.example.municipaldeputy.activity
+package com.example.municipaldeputy.activity.add
 
 import android.app.DatePickerDialog
+import android.app.ProgressDialog
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.DatePicker
@@ -9,19 +10,25 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.municipaldeputy.R
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import com.example.municipaldeputy.entity.House
+import com.example.municipaldeputy.entity.Street
 import com.example.municipaldeputy.entity.Work
 import com.example.municipaldeputy.sqlite.RoomViewModel
+import kotlinx.android.synthetic.main.activity_add_street.*
 import kotlinx.android.synthetic.main.activity_add_work.*
+import kotlinx.android.synthetic.main.activity_add_work.add_btn
+import kotlinx.android.synthetic.main.activity_add_work.spinner
 import kotlinx.android.synthetic.main.activity_add_work.work_date_vtext
-import kotlinx.android.synthetic.main.item_work.*
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
 
 class AddWorkActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener {
     private lateinit var roomViewModel: RoomViewModel
-    var selectedDate = Date()
+    private var selectedDate = Date()
+    private var dialog:ProgressDialog?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,23 +83,35 @@ class AddWorkActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener 
     }
 
     private fun addClick() {
-        val workName = work_name_edt.text.toString()
-        val workDate = work_date_vtext.text.toString()
-        val worker = construction_company_edt.text.toString()
+        lifecycleScope.launch {
+            dialog = ProgressDialog(this@AddWorkActivity).apply {
+                setMessage(this@AddWorkActivity.getString(R.string.please_wait))
+                setTitle(R.string.adding_entity)
+                setCancelable(false)
+                setProgressBarIndeterminate(true)
+                show()
+            }
+            var resultInsert: Long? = null
+            val workName = work_name_edt.text.toString()
+            val workDate = work_date_vtext.text.toString()
+            val worker = construction_company_edt.text.toString()
 
-        val workdone = if (done_chbx.isChecked) {
-            1
-        } else {
-            0
+            val workdone = if (done_chbx.isChecked) {
+                1
+            } else {
+                0
+            }
+            val houseId = (roomViewModel.getHouseIdByName(spinner.selectedItem.toString())).id
+            if (inputCheck(workName, workDate, worker, houseId)) {
+                resultInsert=roomViewModel.addWork(Work(0, workName, workDate, worker, workdone, houseId))
+            }
+            dialog?.dismiss()
+            if (resultInsert != null) {
+                Toast.makeText(this@AddWorkActivity, getString(R.string.add_success), Toast.LENGTH_LONG).show()
+            } else {
+                Toast.makeText(this@AddWorkActivity, getString(R.string.incorrect_input), Toast.LENGTH_LONG).show()
+            }
         }
-        val houseId = (roomViewModel.getHouseIdByName(spinner.selectedItem.toString()) as House).id
-        if (inputCheck(workName, workDate, worker, houseId)) {
-            roomViewModel.addWork(Work(0, workName, workDate, worker, workdone, houseId))
-            Toast.makeText(this, getString(R.string.add_success), Toast.LENGTH_LONG).show()
-        } else {
-            Toast.makeText(this, getString(R.string.incorrect_input), Toast.LENGTH_LONG).show()
-        }
-
     }
 
     private fun inputCheck(

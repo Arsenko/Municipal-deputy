@@ -8,9 +8,7 @@ class StreetRepository(private val streetDAO:StreetDAO) {
 
     fun readDataWithDistrictId(districtId:Int)=streetDAO.readDataWithDistrictId(districtId)
 
-    suspend fun addStreet(street: Street) {
-        streetDAO.add(street)
-    }
+    suspend fun addStreet(street: Street) = streetDAO.add(street)
 
     fun getIdByName(streetName: String) = streetDAO.getIdByName(streetName)
 }

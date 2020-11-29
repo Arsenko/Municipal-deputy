@@ -13,7 +13,7 @@ import com.example.municipaldeputy.entity.Human
 @Dao
 interface HumanDAO {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun add(human: Human)
+    suspend fun add(human: Human):Long
 
     @Query("SELECT * FROM $ASSETS_TABLE ORDER BY $A_KEY_ID ASC")
     fun readAllData(): LiveData<List<Human>>

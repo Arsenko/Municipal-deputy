@@ -6,9 +6,7 @@ import com.example.municipaldeputy.sqlite.dao.WorkDAO
 class WorkRepository(private val workDAO: WorkDAO) {
     fun readAllData() = workDAO.readAllData()
 
-    suspend fun addWork(work: Work) {
-        workDAO.add(work)
-    }
+    suspend fun addWork(work: Work) = workDAO.add(work)
 
     fun readUndoneDataWithHouseID(houseId: Int) = workDAO.readUndoneDataWithHouseId(houseId)
 

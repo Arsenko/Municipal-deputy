@@ -1,24 +1,24 @@
-package com.example.municipaldeputy.activity
+package com.example.municipaldeputy.activity.add
 
+import android.app.ProgressDialog
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.example.municipaldeputy.R
 import com.example.municipaldeputy.entity.District
 import com.example.municipaldeputy.entity.Region
 import com.example.municipaldeputy.sqlite.RoomViewModel
 import kotlinx.android.synthetic.main.activity_add_district.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.android.synthetic.main.activity_add_district.add_btn
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
 class AddDistrictActivity : AppCompatActivity() {
     private lateinit var roomViewModel: RoomViewModel
+    private var dialog: ProgressDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,13 +45,26 @@ class AddDistrictActivity : AppCompatActivity() {
     }
 
     private fun addDistrict() {
-        val name = district_name_edt.text.toString()
-        val regionId = roomViewModel.getRegionIdByName(spinner.selectedItem.toString()).id
-        if (inputCheck(name, regionId)) {
-            roomViewModel.addDistrict(District(0, name, regionId))
-            Toast.makeText(this, getString(R.string.add_success), Toast.LENGTH_LONG).show()
-        } else {
-            Toast.makeText(this, getString(R.string.incorrect_input), Toast.LENGTH_LONG).show()
+        lifecycleScope.launch {
+            dialog = ProgressDialog(this@AddDistrictActivity).apply {
+                setMessage(this@AddDistrictActivity.getString(R.string.please_wait))
+                setTitle(R.string.adding_entity)
+                setCancelable(false)
+                setProgressBarIndeterminate(true)
+                show()
+            }
+            var resultInsert: Long? = null
+            val name = district_name_edt.text.toString()
+            val regionId = roomViewModel.getRegionIdByName(spinner.selectedItem.toString()).id
+            if (inputCheck(name, regionId)) {
+                resultInsert = roomViewModel.addDistrict(District(0, name, regionId))
+            }
+            dialog?.dismiss()
+            if (resultInsert != null) {
+                Toast.makeText(this@AddDistrictActivity, getString(R.string.add_success), Toast.LENGTH_LONG).show()
+            } else {
+                Toast.makeText(this@AddDistrictActivity, getString(R.string.incorrect_input), Toast.LENGTH_LONG).show()
+            }
         }
     }
 

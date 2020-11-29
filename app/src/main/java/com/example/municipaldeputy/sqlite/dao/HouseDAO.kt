@@ -11,7 +11,7 @@ import com.example.municipaldeputy.entity.House
 @Dao
 interface HouseDAO {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun add(house: House)
+    suspend fun add(house: House) : Long
 
     @Query("SELECT * FROM $HOUSE_TABLE ORDER BY $H_KEY_ID ASC")
     fun readAllData(): LiveData<List<House>>

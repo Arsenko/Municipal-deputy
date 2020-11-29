@@ -14,7 +14,7 @@ import com.example.municipaldeputy.entity.Region
 interface RegionDAO {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun add(region:Region)
+    suspend fun add(region:Region): Long
 
     @Query("SELECT * FROM $REGION_TABLE ORDER BY $R_KEY_ID ASC")
     fun readAllData(): LiveData<List<Region>>

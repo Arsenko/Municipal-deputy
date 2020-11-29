@@ -9,8 +9,8 @@ class RegionRepository(private val regionDAO: RegionDAO) {
 
     fun readAllDataSync() =regionDAO.readAllDataSync()
 
-    suspend fun addRegion(region: Region) {
-        regionDAO.add(region)
+    suspend fun addRegion(region: Region):Long {
+        return regionDAO.add(region)
     }
 
     fun getIdByName(regionName: String) = regionDAO.getIdByName(regionName)

@@ -12,11 +12,12 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:padding="5dp"
-        android:text="Работа такая"
+        tools:text="Работа такая"
         app:layout_constraintBottom_toTopOf="@+id/work_date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        style="@style/sample_style"/>
 
     <TextView
         android:id="@+id/work_date"
@@ -28,7 +29,8 @@
         app:layout_constraintBottom_toTopOf="@+id/worker_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
-        app:layout_constraintTop_toBottomOf="@+id/work_name" />
+        app:layout_constraintTop_toBottomOf="@+id/work_name"
+        style="@style/sample_style"/>
 
     <TextView
         android:id="@+id/worker_name"
@@ -40,7 +42,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
-        app:layout_constraintTop_toBottomOf="@+id/work_date" />
+        app:layout_constraintTop_toBottomOf="@+id/work_date"
+        style="@style/sample_style"/>
 
     <TextView
         android:id="@+id/work_title_text"
@@ -48,10 +51,11 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:padding="5dp"
-        android:text="Work title:"
+        android:text="@string/work_title"
         app:layout_constraintBottom_toTopOf="@+id/work_date_vtext"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        style="@style/sample_style"/>
 
     <TextView
         android:id="@+id/work_date_vtext"
@@ -59,10 +63,11 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:padding="5dp"
-        android:text="Work date:"
+        android:text="@string/work_date"
         app:layout_constraintBottom_toTopOf="@+id/management_compant_title_text"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/work_title_text" />
+        app:layout_constraintTop_toBottomOf="@+id/work_title_text"
+        style="@style/sample_style"/>
 
     <TextView
         android:id="@+id/management_compant_title_text"
@@ -70,10 +75,11 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:padding="5dp"
-        android:text="Management company:"
+        android:text="@string/management_company"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/work_date_vtext" />
+        app:layout_constraintTop_toBottomOf="@+id/work_date_vtext"
+        style="@style/sample_style"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"

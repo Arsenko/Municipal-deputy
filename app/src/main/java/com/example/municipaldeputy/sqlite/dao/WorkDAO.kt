@@ -11,7 +11,7 @@ import com.example.municipaldeputy.entity.Work
 @Dao
 interface WorkDAO {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun add(work: Work)
+    suspend fun add(work: Work):Long
 
     @Query("SELECT * FROM $WORK_TABLE ORDER BY id ASC")
     fun readAllData(): LiveData<List<Work>>

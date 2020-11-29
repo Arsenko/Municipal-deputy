@@ -11,7 +11,7 @@ import com.example.municipaldeputy.entity.Street
 @Dao
 interface StreetDAO {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun add(street: Street)
+    suspend fun add(street: Street):Long
 
     @Query("SELECT * FROM $STREET_TABLE ORDER BY $S_KEY_ID ASC")
     fun readAllData(): LiveData<List<Street>>

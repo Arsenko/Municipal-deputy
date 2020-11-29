@@ -54,4 +54,9 @@
     <string name="done_improvement_works">Done improvement works</string>
     <string name="undone_improvement_works">Undone improvement works</string>
     <string name="select_option">Select option</string>
+    <string name="work_date">Work date:</string>
+    <string name="management_company">Management company:</string>
+    <string name="work_title">Work title:</string>
+    <string name="please_wait">Please wait</string>
+    <string name="adding_entity">Adding entity</string>
 </resources>

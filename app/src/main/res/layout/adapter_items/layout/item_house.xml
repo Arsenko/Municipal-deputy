@@ -12,12 +12,14 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:padding="5dp"
+        android:singleLine="false"
         app:layout_constraintBottom_toTopOf="@+id/house_floors"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="дом какой-то" />
+        tools:text="дом какой-то"
+        style="@style/sample_style"/>
 
     <TextView
         android:id="@+id/house_floors"
@@ -25,12 +27,14 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:padding="5dp"
+        android:singleLine="false"
         app:layout_constraintBottom_toTopOf="@+id/house_entrances"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/house_address"
-        tools:text="этажей много" />
+        tools:text="этажей много"
+        style="@style/sample_style"/>
 
     <TextView
         android:id="@+id/house_entrances"
@@ -38,12 +42,14 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:padding="5dp"
+        android:singleLine="false"
         app:layout_constraintBottom_toTopOf="@+id/house_management_company"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/house_floors"
-        tools:text="подъездов мало" />
+        tools:text="подъездов мало"
+        style="@style/sample_style"/>
 
     <TextView
         android:id="@+id/house_management_company"
@@ -51,11 +57,13 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:padding="5dp"
+        android:singleLine="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        tools:text="застройщик такой-то" />
+        tools:text="застройщик такой-то"
+        style="@style/sample_style"/>
 
     <TextView
         android:id="@+id/house_id"
@@ -74,7 +82,8 @@
         android:text="@string/address_text"
         app:layout_constraintBottom_toTopOf="@+id/number_of_floors_text"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        style="@style/sample_style"/>
 
     <TextView
         android:id="@+id/number_of_floors_text"
@@ -85,7 +94,8 @@
         android:text="@string/number_of_floors_text"
         app:layout_constraintBottom_toTopOf="@+id/number_of_entrances_text"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/address_text" />
+        app:layout_constraintTop_toBottomOf="@+id/address_text"
+        style="@style/sample_style"/>
 
     <TextView
         android:id="@+id/number_of_entrances_text"
@@ -97,7 +107,8 @@
         app:layout_constraintBottom_toTopOf="@+id/managment_company_text"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/number_of_floors_text" />
+        app:layout_constraintTop_toBottomOf="@+id/number_of_floors_text"
+        style="@style/sample_style"/>
 
     <TextView
         android:id="@+id/managment_company_text"
@@ -107,7 +118,8 @@
         android:padding="5dp"
         android:text="@string/developer_company_text"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        style="@style/sample_style"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"

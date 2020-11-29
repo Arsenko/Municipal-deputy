@@ -6,8 +6,8 @@ import com.example.municipaldeputy.sqlite.dao.HouseDAO
 class HouseRepository(private val houseDAO: HouseDAO) {
     fun readAllData() = houseDAO.readAllData()
 
-    suspend fun addHouse(house: House) {
-        houseDAO.add(house)
+    suspend fun addHouse(house: House): Long {
+        return houseDAO.add(house)
     }
 
     fun readDataWithStreetId(streetId:Int)=houseDAO.readDataWithStreetId(streetId)

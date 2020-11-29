@@ -8,7 +8,7 @@ class PhotoRepository(private val photoDAO: PhotoDAO) {
 
     fun getDataWithHouseIdSync(houseId:Int)=photoDAO.getDataWithHouseIdSync(houseId)
 
-    suspend fun addPhoto(photoLink: PhotoLink) {
+    suspend fun addPhoto(photoLink: PhotoLink) =
         photoDAO.add(photoLink)
-    }
+
 }

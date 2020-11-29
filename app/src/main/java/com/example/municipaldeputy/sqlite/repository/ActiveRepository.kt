@@ -8,7 +8,5 @@ class ActiveRepository(private val humanDAO : HumanDAO) {
 
     fun readDataWithHouseId(id:Int) = humanDAO.readDataWithHouseId(id)
 
-    suspend fun addActive(human: Human) {
-        humanDAO.add(human)
-    }
+    suspend fun addActive(human: Human) = humanDAO.add(human)
 }

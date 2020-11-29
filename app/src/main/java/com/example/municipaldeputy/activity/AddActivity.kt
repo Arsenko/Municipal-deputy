@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.municipaldeputy.R
+import com.example.municipaldeputy.activity.add.*
 import kotlinx.android.synthetic.main.activity_add.*
 
 class AddActivity : AppCompatActivity(){
@@ -15,25 +16,25 @@ class AddActivity : AppCompatActivity(){
 
     private fun init() {
         add_region_btn.setOnClickListener {
-            startActivity(Intent(this,AddRegionActivity::class.java))
+            startActivity(Intent(this, AddRegionActivity::class.java))
         }
         add_district_btn.setOnClickListener {
-            startActivity(Intent(this,AddDistrictActivity::class.java))
+            startActivity(Intent(this, AddDistrictActivity::class.java))
         }
         add_street_btn.setOnClickListener {
-            startActivity(Intent(this,AddStreetActivity::class.java))
+            startActivity(Intent(this, AddStreetActivity::class.java))
         }
         add_house_btn.setOnClickListener {
-            startActivity(Intent(this,AddHouseActivity::class.java))
+            startActivity(Intent(this, AddHouseActivity::class.java))
         }
         add_photo_btn.setOnClickListener {
-            startActivity(Intent(this,AddPhotoActivity::class.java))
+            startActivity(Intent(this, AddPhotoActivity::class.java))
         }
         add_work_btn.setOnClickListener {
-            startActivity(Intent(this,AddWorkActivity::class.java))
+            startActivity(Intent(this, AddWorkActivity::class.java))
         }
         add_asset_btn.setOnClickListener {
-            startActivity(Intent(this,AddActiveActivity::class.java))
+            startActivity(Intent(this, AddActiveActivity::class.java))
         }
     }
 }

@@ -8,8 +8,8 @@ class DistrictRepository(private val districtDAO: DistrictDAO) {
 
     fun readDataWithRegionId(regionId:Int) =districtDAO.readDataWithRegionId(regionId)
 
-    suspend fun addDistrict(district: District) {
-        districtDAO.add(district)
+    suspend fun addDistrict(district: District):Long {
+        return districtDAO.add(district)
     }
 
     fun getIdByName(districtName: String) = districtDAO.getIdByName(districtName)

@@ -25,10 +25,10 @@
     <string name="surname">Фамилия</string>
     <string name="create_photo">Создать запись о фото</string>
     <string name="add_photo">Добавить запись о фото</string>
-    <string name="already_exist">Уже существет</string>
+    <string name="already_exist">Уже существует</string>
     <string name="add_success">Успешно добавлено!</string>
     <string name="pick_photo">Выберите фото</string>
-    <string name="permission_error">Ошибка привелегий</string>
+    <string name="permission_error">Ошибка доступа</string>
     <string name="add_work">Добавить работу</string>
     <string name="add_asset">Добавить актив</string>
     <string name="house_address">Адрес дома</string>
@@ -48,10 +48,13 @@
     <string name="date_text">Дата:</string>
     <string name="add_to_database">Добавить в базу данных</string>
     <string name="browse_data">Просмотреть информацию</string>
-    <string name="incorrect_input">Не кореектный ввод</string>
+    <string name="incorrect_input">Не корректный ввод</string>
     <string name="house_foto">Фотографии дома</string>
     <string name="active_list">Список актива</string>
-    <string name="done_improvement_works">Выполненые работы по благоустройству</string>
-    <string name="undone_improvement_works">Не выполненые работы по благоустройству</string>
+    <string name="done_improvement_works">Выполненные работы по благоустройству</string>
+    <string name="undone_improvement_works">Запланированные работы по благоустройству</string>
     <string name="select_option">Выберите опцию</string>
+    <string name="work_date">Дата работы:</string>
+    <string name="management_company">Управляющая компания:</string>
+    <string name="work_title">Наименование работы:</string>
 </resources>

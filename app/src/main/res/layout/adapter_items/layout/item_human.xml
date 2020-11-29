@@ -12,11 +12,13 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:padding="5dp"
+        android:singleLine="false"
         app:layout_constraintBottom_toTopOf="@+id/apartment_number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="ФИО" />
+        tools:text="ФИО"
+        style="@style/sample_style"/>
 
     <TextView
         android:id="@+id/apartment_number"
@@ -24,11 +26,13 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:padding="5dp"
+        android:singleLine="false"
         app:layout_constraintBottom_toTopOf="@+id/phone_number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/full_name"
-        tools:text="Квартира такая-то" />
+        tools:text="Квартира такая-то"
+        style="@style/sample_style"/>
 
     <TextView
         android:id="@+id/phone_number"
@@ -36,11 +40,13 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:padding="5dp"
+        android:singleLine="false"
         app:layout_constraintBottom_toTopOf="@+id/mail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/apartment_number"
-        tools:text="телефон есть" />
+        tools:text="телефон есть"
+        style="@style/sample_style"/>
 
     <TextView
         android:id="@+id/mail"
@@ -48,11 +54,13 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:padding="5dp"
+        android:singleLine="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/phone_number"
-        tools:text="ящик присутствует" />
+        tools:text="ящик присутствует"
+        style="@style/sample_style"/>
 
     <TextView
         android:id="@+id/full_name_text"
@@ -64,7 +72,8 @@
         android:text="@string/full_name_text"
         app:layout_constraintBottom_toTopOf="@+id/apartment_number_text"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        style="@style/sample_style"/>
 
     <TextView
         android:id="@+id/apartment_number_text"
@@ -75,7 +84,8 @@
         android:text="@string/apartment_number_text"
         app:layout_constraintBottom_toTopOf="@+id/phone_number_text"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/full_name_text" />
+        app:layout_constraintTop_toBottomOf="@+id/full_name_text"
+        style="@style/sample_style"/>
 
     <TextView
         android:id="@+id/phone_number_text"
@@ -86,7 +96,8 @@
         android:text="@string/phone_number_text"
         app:layout_constraintBottom_toTopOf="@+id/mail_text"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/apartment_number_text" />
+        app:layout_constraintTop_toBottomOf="@+id/apartment_number_text"
+        style="@style/sample_style"/>
 
     <TextView
         android:id="@+id/mail_text"
@@ -97,7 +108,8 @@
         android:text="@string/mail_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/phone_number_text" />
+        app:layout_constraintTop_toBottomOf="@+id/phone_number_text"
+        style="@style/sample_style"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
