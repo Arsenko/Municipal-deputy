@@ -3,12 +3,15 @@ package com.example.municipaldeputy.activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.municipaldeputy.R
+import com.example.municipaldeputy.activity.add.*
 import com.example.municipaldeputy.entity.District
 import com.example.municipaldeputy.entity.Region
 import com.example.municipaldeputy.entity.Street
@@ -120,5 +123,40 @@ class PrimaryChoiseActivity : AppCompatActivity() {
         val toHouseList = Intent(applicationContext, HouseListActivity::class.java)
         toHouseList.putExtra("id", intent.getIntExtra("id", -1))
         startActivity(toHouseList)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.menu_app_bar, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        var intent:Intent?=null
+        when(item.itemId){
+            R.id.action_region ->{
+                intent= Intent(this, AddRegionActivity::class.java)
+            }
+            R.id.action_district ->{
+                intent= Intent(this, AddDistrictActivity::class.java)
+            }
+            R.id.action_street ->{
+                intent= Intent(this, AddStreetActivity::class.java)
+            }
+            R.id.action_house ->{
+                intent= Intent(this, AddHouseActivity::class.java)
+            }
+            R.id.action_photo ->{
+                intent= Intent(this, AddPhotoActivity::class.java)
+            }
+            R.id.action_work ->{
+                intent= Intent(this, AddWorkActivity::class.java)
+            }
+            R.id.action_active ->{
+                intent= Intent(this, AddActiveActivity::class.java)
+            }
+        }
+        startActivity(intent)
+        return true
     }
 }
